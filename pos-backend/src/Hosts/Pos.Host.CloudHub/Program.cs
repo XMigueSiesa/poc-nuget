@@ -48,6 +48,7 @@ app.MapProductsEndpoints();
 app.MapPaymentsEndpoints();
 
 // Sync receivers (from local POS stores)
+app.MapSyncCategoriesEndpoints();
 app.MapSyncProductsEndpoints();
 app.MapSyncOrdersEndpoints();
 
@@ -57,7 +58,7 @@ app.MapGet("/", () => Results.Ok(new
 {
     Service = "POS Cloud Hub",
     Modules = new[] { "Orders", "Products", "Payments" },
-    Sync = new[] { "POST /api/sync/products", "POST /api/sync/orders" },
+    Sync = new[] { "POST /api/sync/categories", "POST /api/sync/products", "POST /api/sync/orders" },
     Docs = "/scalar/v1",
     Status = "Running"
 }));

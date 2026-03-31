@@ -66,6 +66,7 @@ public sealed class SyncOutboxWorker(
             {
                 var endpoint = entry.EntityType switch
                 {
+                    "Category" => $"{_options.CloudBaseUrl}/api/sync/categories",
                     "Product" => $"{_options.CloudBaseUrl}/api/sync/products",
                     "Order" => $"{_options.CloudBaseUrl}/api/sync/orders",
                     _ => null
