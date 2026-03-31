@@ -57,6 +57,13 @@ poc-nuget/
 
 ## Ejecución paso a paso
 
+### 0. Limpiar estado anterior (si ya corriste la demo antes)
+
+```bash
+docker rm -f pos-postgres 2>/dev/null || true
+docker compose down -v 2>/dev/null || true
+```
+
 ### 1. Clonar y posicionarse
 
 ```bash
@@ -255,6 +262,7 @@ rm -rf artifacts/
 | Error | Causa probable | Solución |
 |-------|---------------|----------|
 | `docker: command not found` | Docker Desktop no está abierto | Abrir Docker Desktop desde Applications |
+| `Conflict. The container name "/pos-postgres" is already in use` | Contenedor de sesión anterior no fue limpiado | `docker rm -f pos-postgres && docker compose up -d` |
 | `Connection refused :5432` | PostgreSQL no terminó de iniciar | Esperar 10s y reintentar |
 | `Address already in use :5100` | Puerto ocupado por otro proceso | `lsof -i :5100` para ver qué proceso es |
 | `Address already in use :5200` | Puerto ocupado | `lsof -i :5200` |
