@@ -149,9 +149,9 @@ Abrir en el navegador:
 ### Paso 1 — Crear una categoría en LocalPOS
 
 ```bash
-curl -s -X POST http://localhost:5100/api/products/categories \
+curl -s -X POST http://localhost:5100/api/categories \
   -H "Content-Type: application/json" \
-  -d '{"name": "Electrónica"}' | jq .
+  -d '{"name": "Electronica"}' | jq .
 ```
 
 Copiar el `id` del resultado.

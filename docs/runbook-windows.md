@@ -176,7 +176,7 @@ Abrir en el navegador:
 
 ```powershell
 # Crear categoría
-$cat = Invoke-RestMethod -Uri http://localhost:5100/api/products/categories `
+$cat = Invoke-RestMethod -Uri http://localhost:5100/api/categories `
   -Method Post `
   -ContentType "application/json" `
   -Body '{"name": "Electronica"}'
