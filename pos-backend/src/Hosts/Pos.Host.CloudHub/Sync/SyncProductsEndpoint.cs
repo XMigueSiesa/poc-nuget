@@ -16,8 +16,22 @@ public static class SyncProductsEndpoint
 
         sync.MapPost("/products", async (ProductDto dto, ProductsDbContext db, CancellationToken ct) =>
         {
-            var ulid = Ulid.Parse(dto.Id);
-            var existing = await db.Products.FindAsync([ulid], ct);
+            // Upsert category first to satisfy FK constraint
+            var categoryUlid = Ulid.Parse(dto.CategoryId);
+            var existingCategory = await db.Categories.FindAsync([categoryUlid], ct);
+            if (existingCategory is null)
+            {
+                db.Categories.Add(new Category
+                {
+                    Id = categoryUlid,
+                    Name = dto.CategoryName ?? dto.CategoryId
+                });
+                await db.SaveChangesAsync(ct);
+            }
+
+            // Upsert product
+            var productUlid = Ulid.Parse(dto.Id);
+            var existing = await db.Products.FindAsync([productUlid], ct);
 
             if (existing is not null)
             {
@@ -25,7 +39,7 @@ public static class SyncProductsEndpoint
                 {
                     Name = dto.Name,
                     Description = dto.Description,
-                    CategoryId = Ulid.Parse(dto.CategoryId),
+                    CategoryId = categoryUlid,
                     Price = dto.Price,
                     IsActive = dto.IsActive,
                     UpdatedAt = DateTimeOffset.UtcNow
@@ -35,19 +49,17 @@ public static class SyncProductsEndpoint
             }
             else
             {
-                var product = new Product
+                db.Products.Add(new Product
                 {
-                    Id = ulid,
+                    Id = productUlid,
                     Name = dto.Name,
                     Description = dto.Description,
-                    CategoryId = Ulid.Parse(dto.CategoryId),
+                    CategoryId = categoryUlid,
                     Price = dto.Price,
                     IsActive = dto.IsActive,
                     CreatedAt = dto.CreatedAt,
                     UpdatedAt = dto.UpdatedAt
-                };
-
-                db.Products.Add(product);
+                });
             }
 
             await db.SaveChangesAsync(ct);
