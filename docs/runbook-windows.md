@@ -106,8 +106,7 @@ El script `init-databases.sql` crea automáticamente dos bases:
 Abrir una pestaña nueva en Windows Terminal (`Ctrl+Shift+T`):
 
 ```powershell
-cd src\Hosts\Pos.Host.CloudHub
-dotnet run
+dotnet run --project src\Hosts\Pos.Host.CloudHub
 ```
 
 Esperar hasta ver en los logs:
@@ -124,8 +123,7 @@ info: Now listening on: http://0.0.0.0:5200
 Abrir otra pestaña nueva en Windows Terminal:
 
 ```powershell
-cd src\Hosts\Pos.Host.LocalPOS
-dotnet run
+dotnet run --project src\Hosts\Pos.Host.LocalPOS
 ```
 
 Esperar hasta ver:

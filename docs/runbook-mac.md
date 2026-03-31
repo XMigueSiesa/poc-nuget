@@ -93,8 +93,7 @@ El script `init-databases.sql` crea automáticamente dos bases:
 Abrir una terminal nueva:
 
 ```bash
-cd src/Hosts/Pos.Host.CloudHub
-dotnet run
+dotnet run --project src/Hosts/Pos.Host.CloudHub
 ```
 
 Esperar hasta ver en los logs:
@@ -111,8 +110,7 @@ info: Now listening on: http://0.0.0.0:5200
 Abrir otra terminal nueva:
 
 ```bash
-cd src/Hosts/Pos.Host.LocalPOS
-dotnet run
+dotnet run --project src/Hosts/Pos.Host.LocalPOS
 ```
 
 Esperar hasta ver:
