@@ -17,8 +17,9 @@
 
   <!-- Package versions centralized -->
   <PropertyGroup>
-    <EfCoreVersion>10.0.0</EfCoreVersion>
-    <NpgsqlEfVersion>10.0.0</NpgsqlEfVersion>
+    <EfCoreVersion>10.0.5</EfCoreVersion>
+    <NpgsqlEfVersion>10.0.1</NpgsqlEfVersion>
+    <NamingConventionsVersion>10.0.1</NamingConventionsVersion>
     <UlidVersion>1.3.4</UlidVersion>
   </PropertyGroup>
 

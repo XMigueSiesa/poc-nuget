@@ -18,7 +18,8 @@ public static class ProductsModule
     {
         services.AddDbContext<ProductsDbContext>(opt =>
             opt.UseNpgsql(connectionString, npgsql =>
-                npgsql.MigrationsHistoryTable("__EFMigrationsHistory", "products")));
+                npgsql.MigrationsHistoryTable("__EFMigrationsHistory", "products"))
+               .UseSnakeCaseNamingConvention());
 
         services.AddScoped<IProductRepository, EfProductRepository>();
         services.AddScoped<ICategoryRepository, EfCategoryRepository>();

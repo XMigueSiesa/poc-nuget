@@ -18,7 +18,8 @@ public static class PaymentsModule
     {
         services.AddDbContext<PaymentsDbContext>(opt =>
             opt.UseNpgsql(connectionString, npgsql =>
-                npgsql.MigrationsHistoryTable("__EFMigrationsHistory", "payments")));
+                npgsql.MigrationsHistoryTable("__EFMigrationsHistory", "payments"))
+               .UseSnakeCaseNamingConvention());
 
         services.AddScoped<IPaymentRepository, EfPaymentRepository>();
 

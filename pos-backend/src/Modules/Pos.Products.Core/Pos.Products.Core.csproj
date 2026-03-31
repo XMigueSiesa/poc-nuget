@@ -7,6 +7,7 @@
 
   <ItemGroup>
     <FrameworkReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="EFCore.NamingConventions" Version="$(NamingConventionsVersion)" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="$(EfCoreVersion)" />
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="$(NpgsqlEfVersion)" />
   </ItemGroup>
@@ -17,7 +18,7 @@
     <ProjectReference Include="..\Pos.Products.Contracts\Pos.Products.Contracts.csproj" />
   </ItemGroup>
   <ItemGroup Condition="'$(UseProjectReference)' != 'true'">
-    <PackageReference Include="Pos.SharedKernel" Version="*" />
-    <PackageReference Include="Pos.Products.Contracts" Version="*" />
+    <PackageReference Include="Pos.SharedKernel" Version="*-*" />
+    <PackageReference Include="Pos.Products.Contracts" Version="*-*" />
   </ItemGroup>
 </Project>

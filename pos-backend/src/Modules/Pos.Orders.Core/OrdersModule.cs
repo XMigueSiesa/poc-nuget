@@ -18,7 +18,8 @@ public static class OrdersModule
     {
         services.AddDbContext<OrdersDbContext>(opt =>
             opt.UseNpgsql(connectionString, npgsql =>
-                npgsql.MigrationsHistoryTable("__EFMigrationsHistory", "orders")));
+                npgsql.MigrationsHistoryTable("__EFMigrationsHistory", "orders"))
+               .UseSnakeCaseNamingConvention());
 
         services.AddScoped<IOrderRepository, EfOrderRepository>();
 

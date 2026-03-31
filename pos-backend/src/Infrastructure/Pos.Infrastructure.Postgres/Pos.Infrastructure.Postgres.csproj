@@ -17,6 +17,6 @@
     <ProjectReference Include="..\..\Shared\Pos.SharedKernel\Pos.SharedKernel.csproj" />
   </ItemGroup>
   <ItemGroup Condition="'$(UseProjectReference)' != 'true'">
-    <PackageReference Include="Pos.SharedKernel" Version="*" />
+    <PackageReference Include="Pos.SharedKernel" Version="*-*" />
   </ItemGroup>
 </Project>
