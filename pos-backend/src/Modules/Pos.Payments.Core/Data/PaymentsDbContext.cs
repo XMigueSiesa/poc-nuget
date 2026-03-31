@@ -21,7 +21,7 @@ public sealed class PaymentsDbContext(DbContextOptions<PaymentsDbContext> option
             e.Property(p => p.Status).HasMaxLength(20).IsRequired();
             e.Property(p => p.TransactionId).HasMaxLength(100);
             e.HasIndex(p => p.OrderId);
-            e.HasIndex(p => p.TransactionId).IsUnique().HasFilter("\"TransactionId\" IS NOT NULL");
+            e.HasIndex(p => p.TransactionId).IsUnique().HasFilter("\"transaction_id\" IS NOT NULL");
         });
     }
 }
