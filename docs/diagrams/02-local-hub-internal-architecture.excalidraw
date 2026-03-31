@@ -1,0 +1,400 @@
+{
+  "type": "excalidraw",
+  "version": 2,
+  "source": "claude-code",
+  "elements": [
+    {
+      "type": "text", "id": "title", "x": 180, "y": 0, "width": 500, "height": 35,
+      "text": "Local Hub - Arquitectura Interna", "fontSize": 28, "fontFamily": 1,
+      "strokeColor": "#1e1e1e", "textAlign": "center"
+    },
+    {
+      "type": "text", "id": "subtitle", "x": 220, "y": 40, "width": 400, "height": 20,
+      "text": "Proceso único .NET con módulos NuGet compuestos", "fontSize": 16, "fontFamily": 1,
+      "strokeColor": "#757575", "textAlign": "center"
+    },
+
+    {
+      "type": "rectangle", "id": "hub-border", "x": 10, "y": 80, "width": 840, "height": 720,
+      "backgroundColor": "#d3f9d8", "fillStyle": "solid", "roundness": {"type": 3},
+      "strokeColor": "#22c55e", "strokeWidth": 2, "opacity": 25
+    },
+    {
+      "type": "text", "id": "hub-title", "x": 30, "y": 88, "width": 300, "height": 22,
+      "text": "LOCAL HUB  (Pos.Host.LocalHub)", "fontSize": 18, "fontFamily": 1, "strokeColor": "#15803d"
+    },
+
+    {
+      "type": "rectangle", "id": "api-layer", "x": 30, "y": 125, "width": 800, "height": 80,
+      "backgroundColor": "#dbe4ff", "fillStyle": "solid", "roundness": {"type": 3},
+      "strokeColor": "#4a9eed", "opacity": 50
+    },
+    {
+      "type": "text", "id": "api-layer-lbl", "x": 40, "y": 130, "width": 200, "height": 18,
+      "text": "API Layer (Minimal APIs)", "fontSize": 15, "fontFamily": 1, "strokeColor": "#2563eb"
+    },
+    {
+      "type": "rectangle", "id": "ep-orders", "x": 45, "y": 155, "width": 145, "height": 38,
+      "backgroundColor": "#a5d8ff", "fillStyle": "solid", "roundness": {"type": 3},
+      "strokeColor": "#4a9eed"
+    },
+    {
+      "type": "text", "id": "ep-orders-lbl", "x": 55, "y": 163, "width": 125, "height": 18,
+      "text": "/api/orders/*", "fontSize": 13, "fontFamily": 3, "strokeColor": "#1e1e1e",
+      "textAlign": "center", "containerId": "ep-orders"
+    },
+    {
+      "type": "rectangle", "id": "ep-products", "x": 205, "y": 155, "width": 155, "height": 38,
+      "backgroundColor": "#a5d8ff", "fillStyle": "solid", "roundness": {"type": 3},
+      "strokeColor": "#4a9eed"
+    },
+    {
+      "type": "text", "id": "ep-products-lbl", "x": 215, "y": 163, "width": 135, "height": 18,
+      "text": "/api/products/*", "fontSize": 13, "fontFamily": 3, "strokeColor": "#1e1e1e",
+      "textAlign": "center", "containerId": "ep-products"
+    },
+    {
+      "type": "rectangle", "id": "ep-payments", "x": 375, "y": 155, "width": 155, "height": 38,
+      "backgroundColor": "#a5d8ff", "fillStyle": "solid", "roundness": {"type": 3},
+      "strokeColor": "#4a9eed"
+    },
+    {
+      "type": "text", "id": "ep-payments-lbl", "x": 385, "y": 163, "width": 135, "height": 18,
+      "text": "/api/payments/*", "fontSize": 13, "fontFamily": 3, "strokeColor": "#1e1e1e",
+      "textAlign": "center", "containerId": "ep-payments"
+    },
+    {
+      "type": "rectangle", "id": "ep-periph", "x": 545, "y": 155, "width": 155, "height": 38,
+      "backgroundColor": "#e5dbff", "fillStyle": "solid", "roundness": {"type": 3},
+      "strokeColor": "#8b5cf6"
+    },
+    {
+      "type": "text", "id": "ep-periph-lbl", "x": 555, "y": 163, "width": 135, "height": 18,
+      "text": "/api/peripherals/*", "fontSize": 13, "fontFamily": 3, "strokeColor": "#1e1e1e",
+      "textAlign": "center", "containerId": "ep-periph"
+    },
+    {
+      "type": "rectangle", "id": "ep-health", "x": 715, "y": 155, "width": 100, "height": 38,
+      "backgroundColor": "#c3fae8", "fillStyle": "solid", "roundness": {"type": 3},
+      "strokeColor": "#06b6d4"
+    },
+    {
+      "type": "text", "id": "ep-health-lbl", "x": 725, "y": 163, "width": 80, "height": 18,
+      "text": "/health", "fontSize": 13, "fontFamily": 3, "strokeColor": "#1e1e1e",
+      "textAlign": "center", "containerId": "ep-health"
+    },
+
+    {
+      "type": "rectangle", "id": "modules-zone", "x": 30, "y": 225, "width": 540, "height": 200,
+      "backgroundColor": "#dbe4ff", "fillStyle": "solid", "roundness": {"type": 3},
+      "strokeColor": "#4a9eed", "opacity": 35
+    },
+    {
+      "type": "text", "id": "modules-lbl", "x": 40, "y": 230, "width": 250, "height": 18,
+      "text": "Domain Modules (NuGet Packages)", "fontSize": 15, "fontFamily": 1, "strokeColor": "#2563eb"
+    },
+
+    {
+      "type": "rectangle", "id": "mod-orders", "x": 45, "y": 258, "width": 160, "height": 155,
+      "backgroundColor": "#a5d8ff", "fillStyle": "solid", "roundness": {"type": 3},
+      "strokeColor": "#4a9eed", "opacity": 60
+    },
+    {
+      "type": "text", "id": "mod-orders-title", "x": 55, "y": 262, "width": 140, "height": 18,
+      "text": "Pos.Orders.Core", "fontSize": 14, "fontFamily": 1, "strokeColor": "#1e1e1e",
+      "textAlign": "center"
+    },
+    {
+      "type": "text", "id": "mod-orders-detail", "x": 55, "y": 285, "width": 140, "height": 120,
+      "text": "OrderEntity\nOrderLine\nIOrderRepository\nOrderService\nAddOrdersModule()\nMapOrdersEndpoints()", "fontSize": 11, "fontFamily": 3, "strokeColor": "#495057"
+    },
+
+    {
+      "type": "rectangle", "id": "mod-products", "x": 220, "y": 258, "width": 165, "height": 155,
+      "backgroundColor": "#a5d8ff", "fillStyle": "solid", "roundness": {"type": 3},
+      "strokeColor": "#4a9eed", "opacity": 60
+    },
+    {
+      "type": "text", "id": "mod-products-title", "x": 230, "y": 262, "width": 145, "height": 18,
+      "text": "Pos.Products.Core", "fontSize": 14, "fontFamily": 1, "strokeColor": "#1e1e1e",
+      "textAlign": "center"
+    },
+    {
+      "type": "text", "id": "mod-products-detail", "x": 230, "y": 285, "width": 145, "height": 120,
+      "text": "ProductEntity\nCategory\nIProductRepository\nProductService\nAddProductsModule()\nMapProductsEndpoints()", "fontSize": 11, "fontFamily": 3, "strokeColor": "#495057"
+    },
+
+    {
+      "type": "rectangle", "id": "mod-payments", "x": 400, "y": 258, "width": 160, "height": 155,
+      "backgroundColor": "#a5d8ff", "fillStyle": "solid", "roundness": {"type": 3},
+      "strokeColor": "#4a9eed", "opacity": 60
+    },
+    {
+      "type": "text", "id": "mod-payments-title", "x": 410, "y": 262, "width": 140, "height": 18,
+      "text": "Pos.Payments.Core", "fontSize": 14, "fontFamily": 1, "strokeColor": "#1e1e1e",
+      "textAlign": "center"
+    },
+    {
+      "type": "text", "id": "mod-payments-detail", "x": 410, "y": 285, "width": 140, "height": 120,
+      "text": "PaymentEntity\nPaymentMethod\nIPaymentRepository\nPaymentService\nAddPaymentsModule()\nMapPaymentsEndpoints()", "fontSize": 11, "fontFamily": 3, "strokeColor": "#495057"
+    },
+
+    {
+      "type": "rectangle", "id": "periph-zone", "x": 590, "y": 225, "width": 240, "height": 200,
+      "backgroundColor": "#e5dbff", "fillStyle": "solid", "roundness": {"type": 3},
+      "strokeColor": "#8b5cf6", "opacity": 40
+    },
+    {
+      "type": "text", "id": "periph-title", "x": 600, "y": 230, "width": 200, "height": 18,
+      "text": "Peripheral Manager", "fontSize": 15, "fontFamily": 1, "strokeColor": "#6d28d9"
+    },
+    {
+      "type": "rectangle", "id": "drv-printer", "x": 605, "y": 258, "width": 105, "height": 38,
+      "backgroundColor": "#d0bfff", "fillStyle": "solid", "roundness": {"type": 3},
+      "strokeColor": "#8b5cf6"
+    },
+    {
+      "type": "text", "id": "drv-printer-lbl", "x": 615, "y": 266, "width": 85, "height": 18,
+      "text": "PrinterDriver", "fontSize": 12, "fontFamily": 3, "strokeColor": "#1e1e1e",
+      "textAlign": "center", "containerId": "drv-printer"
+    },
+    {
+      "type": "rectangle", "id": "drv-scanner", "x": 720, "y": 258, "width": 100, "height": 38,
+      "backgroundColor": "#d0bfff", "fillStyle": "solid", "roundness": {"type": 3},
+      "strokeColor": "#8b5cf6"
+    },
+    {
+      "type": "text", "id": "drv-scanner-lbl", "x": 730, "y": 266, "width": 80, "height": 18,
+      "text": "ScanDriver", "fontSize": 12, "fontFamily": 3, "strokeColor": "#1e1e1e",
+      "textAlign": "center", "containerId": "drv-scanner"
+    },
+    {
+      "type": "rectangle", "id": "drv-cash", "x": 605, "y": 308, "width": 105, "height": 38,
+      "backgroundColor": "#d0bfff", "fillStyle": "solid", "roundness": {"type": 3},
+      "strokeColor": "#8b5cf6"
+    },
+    {
+      "type": "text", "id": "drv-cash-lbl", "x": 615, "y": 316, "width": 85, "height": 18,
+      "text": "CashDriver", "fontSize": 12, "fontFamily": 3, "strokeColor": "#1e1e1e",
+      "textAlign": "center", "containerId": "drv-cash"
+    },
+    {
+      "type": "rectangle", "id": "drv-kitchen", "x": 720, "y": 308, "width": 100, "height": 38,
+      "backgroundColor": "#d0bfff", "fillStyle": "solid", "roundness": {"type": 3},
+      "strokeColor": "#8b5cf6"
+    },
+    {
+      "type": "text", "id": "drv-kitchen-lbl", "x": 730, "y": 316, "width": 80, "height": 18,
+      "text": "KDSDriver", "fontSize": 12, "fontFamily": 3, "strokeColor": "#1e1e1e",
+      "textAlign": "center", "containerId": "drv-kitchen"
+    },
+    {
+      "type": "text", "id": "periph-iface", "x": 605, "y": 360, "width": 210, "height": 50,
+      "text": "IPeripheralDriver<TCmd>\nUSB / Serial / Network\nAuto-discovery via mDNS", "fontSize": 11, "fontFamily": 3, "strokeColor": "#6d28d9"
+    },
+
+    {
+      "type": "rectangle", "id": "infra-zone", "x": 30, "y": 445, "width": 800, "height": 105,
+      "backgroundColor": "#fff3bf", "fillStyle": "solid", "roundness": {"type": 3},
+      "strokeColor": "#f59e0b", "opacity": 40
+    },
+    {
+      "type": "text", "id": "infra-lbl", "x": 40, "y": 450, "width": 300, "height": 18,
+      "text": "Infrastructure / Cross-Cutting", "fontSize": 15, "fontFamily": 1, "strokeColor": "#b45309"
+    },
+
+    {
+      "type": "rectangle", "id": "shared-kernel", "x": 45, "y": 478, "width": 145, "height": 60,
+      "backgroundColor": "#ffd8a8", "fillStyle": "solid", "roundness": {"type": 3},
+      "strokeColor": "#f59e0b"
+    },
+    {
+      "type": "text", "id": "sk-lbl", "x": 55, "y": 483, "width": 125, "height": 50,
+      "text": "SharedKernel\nBaseEntity, ULID\nIEventBus", "fontSize": 11, "fontFamily": 3, "strokeColor": "#1e1e1e",
+      "textAlign": "center", "containerId": "shared-kernel"
+    },
+
+    {
+      "type": "rectangle", "id": "event-bus", "x": 205, "y": 478, "width": 155, "height": 60,
+      "backgroundColor": "#ffd8a8", "fillStyle": "solid", "roundness": {"type": 3},
+      "strokeColor": "#f59e0b"
+    },
+    {
+      "type": "text", "id": "eb-lbl", "x": 215, "y": 483, "width": 135, "height": 50,
+      "text": "InProcessEventBus\nChannel<T>\n(MediatR optional)", "fontSize": 11, "fontFamily": 3, "strokeColor": "#1e1e1e",
+      "textAlign": "center", "containerId": "event-bus"
+    },
+
+    {
+      "type": "rectangle", "id": "ef-core", "x": 375, "y": 478, "width": 150, "height": 60,
+      "backgroundColor": "#ffd8a8", "fillStyle": "solid", "roundness": {"type": 3},
+      "strokeColor": "#f59e0b"
+    },
+    {
+      "type": "text", "id": "ef-lbl", "x": 385, "y": 483, "width": 130, "height": 50,
+      "text": "EF Core + Npgsql\nDbContext per Module\nMigrations", "fontSize": 11, "fontFamily": 3, "strokeColor": "#1e1e1e",
+      "textAlign": "center", "containerId": "ef-core"
+    },
+
+    {
+      "type": "rectangle", "id": "health-check", "x": 540, "y": 478, "width": 130, "height": 60,
+      "backgroundColor": "#ffd8a8", "fillStyle": "solid", "roundness": {"type": 3},
+      "strokeColor": "#f59e0b"
+    },
+    {
+      "type": "text", "id": "hc-lbl", "x": 550, "y": 483, "width": 110, "height": 50,
+      "text": "HealthChecks\nDB + Peripherals\n+ Internet", "fontSize": 11, "fontFamily": 3, "strokeColor": "#1e1e1e",
+      "textAlign": "center", "containerId": "health-check"
+    },
+
+    {
+      "type": "rectangle", "id": "logging", "x": 685, "y": 478, "width": 130, "height": 60,
+      "backgroundColor": "#ffd8a8", "fillStyle": "solid", "roundness": {"type": 3},
+      "strokeColor": "#f59e0b"
+    },
+    {
+      "type": "text", "id": "log-lbl", "x": 695, "y": 483, "width": 110, "height": 50,
+      "text": "Serilog\nStructured Logs\nFile + Console", "fontSize": 11, "fontFamily": 3, "strokeColor": "#1e1e1e",
+      "textAlign": "center", "containerId": "logging"
+    },
+
+    {
+      "type": "rectangle", "id": "sync-zone", "x": 30, "y": 570, "width": 400, "height": 100,
+      "backgroundColor": "#ffd8a8", "fillStyle": "solid", "roundness": {"type": 3},
+      "strokeColor": "#f59e0b", "opacity": 50
+    },
+    {
+      "type": "text", "id": "sync-title", "x": 40, "y": 575, "width": 200, "height": 18,
+      "text": "Sync Engine (Background)", "fontSize": 15, "fontFamily": 1, "strokeColor": "#b45309"
+    },
+    {
+      "type": "rectangle", "id": "sync-outbox", "x": 45, "y": 600, "width": 110, "height": 55,
+      "backgroundColor": "#fff3bf", "fillStyle": "solid", "roundness": {"type": 3},
+      "strokeColor": "#f59e0b"
+    },
+    {
+      "type": "text", "id": "sync-outbox-lbl", "x": 55, "y": 608, "width": 90, "height": 40,
+      "text": "Outbox Poller\nTimer 5s", "fontSize": 11, "fontFamily": 3, "strokeColor": "#1e1e1e",
+      "textAlign": "center", "containerId": "sync-outbox"
+    },
+    {
+      "type": "rectangle", "id": "sync-push", "x": 170, "y": 600, "width": 110, "height": 55,
+      "backgroundColor": "#fff3bf", "fillStyle": "solid", "roundness": {"type": 3},
+      "strokeColor": "#f59e0b"
+    },
+    {
+      "type": "text", "id": "sync-push-lbl", "x": 180, "y": 608, "width": 90, "height": 40,
+      "text": "Batch Push\nHTTP Client", "fontSize": 11, "fontFamily": 3, "strokeColor": "#1e1e1e",
+      "textAlign": "center", "containerId": "sync-push"
+    },
+    {
+      "type": "rectangle", "id": "sync-pull", "x": 295, "y": 600, "width": 120, "height": 55,
+      "backgroundColor": "#fff3bf", "fillStyle": "solid", "roundness": {"type": 3},
+      "strokeColor": "#f59e0b"
+    },
+    {
+      "type": "text", "id": "sync-pull-lbl", "x": 305, "y": 608, "width": 100, "height": 40,
+      "text": "Pull Receiver\nMenu/Precios", "fontSize": 11, "fontFamily": 3, "strokeColor": "#1e1e1e",
+      "textAlign": "center", "containerId": "sync-pull"
+    },
+    {
+      "type": "arrow", "id": "a-outbox-push", "x": 155, "y": 627, "width": 15, "height": 0,
+      "points": [[0,0],[15,0]], "strokeColor": "#f59e0b", "endArrowhead": "arrow"
+    },
+
+    {
+      "type": "rectangle", "id": "pg-zone", "x": 450, "y": 570, "width": 380, "height": 210,
+      "backgroundColor": "#ffc9c9", "fillStyle": "solid", "roundness": {"type": 3},
+      "strokeColor": "#ef4444", "opacity": 30
+    },
+    {
+      "type": "text", "id": "pg-title", "x": 460, "y": 575, "width": 350, "height": 18,
+      "text": "PostgreSQL Local (Low-Resource Config)", "fontSize": 15, "fontFamily": 1, "strokeColor": "#c92a2a"
+    },
+    {
+      "type": "text", "id": "pg-config", "x": 465, "y": 600, "width": 200, "height": 120,
+      "text": "shared_buffers = 256MB\nwork_mem = 4MB\nmax_connections = 20\neffective_cache = 512MB\nwal_level = minimal\ncheckpoint_timeout = 10min\nrandom_page_cost = 1.1 (SSD)", "fontSize": 11, "fontFamily": 3, "strokeColor": "#495057"
+    },
+    {
+      "type": "rectangle", "id": "schema-orders", "x": 680, "y": 600, "width": 130, "height": 35,
+      "backgroundColor": "#ffc9c9", "fillStyle": "solid", "roundness": {"type": 3},
+      "strokeColor": "#ef4444"
+    },
+    {
+      "type": "text", "id": "schema-orders-lbl", "x": 690, "y": 608, "width": 110, "height": 16,
+      "text": "schema: orders", "fontSize": 12, "fontFamily": 3, "strokeColor": "#1e1e1e",
+      "textAlign": "center", "containerId": "schema-orders"
+    },
+    {
+      "type": "rectangle", "id": "schema-products", "x": 680, "y": 645, "width": 130, "height": 35,
+      "backgroundColor": "#ffc9c9", "fillStyle": "solid", "roundness": {"type": 3},
+      "strokeColor": "#ef4444"
+    },
+    {
+      "type": "text", "id": "schema-products-lbl", "x": 690, "y": 653, "width": 110, "height": 16,
+      "text": "schema: products", "fontSize": 12, "fontFamily": 3, "strokeColor": "#1e1e1e",
+      "textAlign": "center", "containerId": "schema-products"
+    },
+    {
+      "type": "rectangle", "id": "schema-payments", "x": 680, "y": 690, "width": 130, "height": 35,
+      "backgroundColor": "#ffc9c9", "fillStyle": "solid", "roundness": {"type": 3},
+      "strokeColor": "#ef4444"
+    },
+    {
+      "type": "text", "id": "schema-payments-lbl", "x": 690, "y": 698, "width": 110, "height": 16,
+      "text": "schema: payments", "fontSize": 12, "fontFamily": 3, "strokeColor": "#1e1e1e",
+      "textAlign": "center", "containerId": "schema-payments"
+    },
+    {
+      "type": "rectangle", "id": "schema-sync", "x": 680, "y": 735, "width": 130, "height": 35,
+      "backgroundColor": "#fff3bf", "fillStyle": "solid", "roundness": {"type": 3},
+      "strokeColor": "#f59e0b"
+    },
+    {
+      "type": "text", "id": "schema-sync-lbl", "x": 690, "y": 743, "width": 110, "height": 16,
+      "text": "sync_outbox", "fontSize": 12, "fontFamily": 3, "strokeColor": "#1e1e1e",
+      "textAlign": "center", "containerId": "schema-sync"
+    },
+
+    {
+      "type": "arrow", "id": "a-mod-db", "x": 260, "y": 413, "width": 380, "height": 195,
+      "points": [[0,0],[380,195]], "strokeColor": "#1e1e1e", "endArrowhead": "arrow"
+    },
+    {
+      "type": "arrow", "id": "a-sync-db", "x": 355, "y": 655, "width": 95, "height": 55,
+      "points": [[0,0],[95,55]], "strokeColor": "#f59e0b", "strokeStyle": "dashed",
+      "endArrowhead": "arrow"
+    },
+
+    {
+      "type": "arrow", "id": "a-api-mod", "x": 150, "y": 193, "width": 0, "height": 32,
+      "points": [[0,0],[0,32]], "strokeColor": "#4a9eed", "endArrowhead": "arrow"
+    },
+    {
+      "type": "arrow", "id": "a-api-mod2", "x": 310, "y": 193, "width": 0, "height": 32,
+      "points": [[0,0],[0,32]], "strokeColor": "#4a9eed", "endArrowhead": "arrow"
+    },
+    {
+      "type": "arrow", "id": "a-api-mod3", "x": 460, "y": 193, "width": 0, "height": 32,
+      "points": [[0,0],[0,32]], "strokeColor": "#4a9eed", "endArrowhead": "arrow"
+    },
+    {
+      "type": "arrow", "id": "a-api-periph", "x": 620, "y": 193, "width": 0, "height": 32,
+      "points": [[0,0],[0,32]], "strokeColor": "#8b5cf6", "endArrowhead": "arrow"
+    },
+
+    {
+      "type": "text", "id": "note-program", "x": 30, "y": 690, "width": 390, "height": 100,
+      "text": "// Program.cs (Local Hub)\nbuilder.Services.AddOrdersModule(o => ...);\nbuilder.Services.AddProductsModule(o => ...);\nbuilder.Services.AddPaymentsModule(o => ...);\nbuilder.Services.AddPeripheralManager();\nbuilder.Services.AddSyncEngine();", "fontSize": 11, "fontFamily": 3, "strokeColor": "#495057"
+    },
+    {
+      "type": "text", "id": "note-label", "x": 30, "y": 675, "width": 200, "height": 16,
+      "text": "Composición en Program.cs:", "fontSize": 12, "fontFamily": 1, "strokeColor": "#15803d"
+    }
+  ],
+  "appState": {
+    "viewBackgroundColor": "#ffffff",
+    "gridSize": null
+  },
+  "files": {}
+}

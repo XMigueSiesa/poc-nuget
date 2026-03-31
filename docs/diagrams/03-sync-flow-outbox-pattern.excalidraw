@@ -1,0 +1,354 @@
+{
+  "type": "excalidraw",
+  "version": 2,
+  "source": "claude-code",
+  "elements": [
+    {
+      "type": "text", "id": "title", "x": 150, "y": 0, "width": 550, "height": 35,
+      "text": "Flujos de Sincronización - Outbox Pattern", "fontSize": 28, "fontFamily": 1,
+      "strokeColor": "#1e1e1e", "textAlign": "center"
+    },
+    {
+      "type": "text", "id": "subtitle", "x": 200, "y": 40, "width": 450, "height": 20,
+      "text": "Write Path + Sync Push Path + Pull Path", "fontSize": 16, "fontFamily": 1,
+      "strokeColor": "#757575", "textAlign": "center"
+    },
+
+    {
+      "type": "rectangle", "id": "flow1-zone", "x": 10, "y": 80, "width": 850, "height": 230,
+      "backgroundColor": "#d3f9d8", "fillStyle": "solid", "roundness": {"type": 3},
+      "strokeColor": "#22c55e", "strokeWidth": 1, "opacity": 25
+    },
+    {
+      "type": "text", "id": "flow1-title", "x": 20, "y": 85, "width": 400, "height": 22,
+      "text": "FLOW 1: Write Path (Local-First, <1ms)", "fontSize": 18, "fontFamily": 1, "strokeColor": "#15803d"
+    },
+
+    {
+      "type": "rectangle", "id": "w-pos", "x": 30, "y": 120, "width": 100, "height": 50,
+      "backgroundColor": "#c3fae8", "fillStyle": "solid", "roundness": {"type": 3},
+      "strokeColor": "#06b6d4"
+    },
+    {
+      "type": "text", "id": "w-pos-lbl", "x": 40, "y": 130, "width": 80, "height": 30,
+      "text": "POS\nTerminal", "fontSize": 13, "fontFamily": 1, "strokeColor": "#1e1e1e",
+      "textAlign": "center", "containerId": "w-pos"
+    },
+    {
+      "type": "arrow", "id": "a-w1", "x": 130, "y": 145, "width": 30, "height": 0,
+      "points": [[0,0],[30,0]], "strokeColor": "#15803d", "endArrowhead": "arrow"
+    },
+    {
+      "type": "text", "id": "a-w1-lbl", "x": 133, "y": 128, "width": 25, "height": 14,
+      "text": "HTTP", "fontSize": 10, "fontFamily": 3, "strokeColor": "#757575"
+    },
+
+    {
+      "type": "rectangle", "id": "w-api", "x": 160, "y": 120, "width": 105, "height": 50,
+      "backgroundColor": "#a5d8ff", "fillStyle": "solid", "roundness": {"type": 3},
+      "strokeColor": "#4a9eed"
+    },
+    {
+      "type": "text", "id": "w-api-lbl", "x": 170, "y": 130, "width": 85, "height": 30,
+      "text": "Minimal API\nEndpoint", "fontSize": 13, "fontFamily": 1, "strokeColor": "#1e1e1e",
+      "textAlign": "center", "containerId": "w-api"
+    },
+    {
+      "type": "arrow", "id": "a-w2", "x": 265, "y": 145, "width": 30, "height": 0,
+      "points": [[0,0],[30,0]], "strokeColor": "#15803d", "endArrowhead": "arrow"
+    },
+
+    {
+      "type": "rectangle", "id": "w-svc", "x": 295, "y": 120, "width": 115, "height": 50,
+      "backgroundColor": "#a5d8ff", "fillStyle": "solid", "roundness": {"type": 3},
+      "strokeColor": "#4a9eed"
+    },
+    {
+      "type": "text", "id": "w-svc-lbl", "x": 305, "y": 130, "width": 95, "height": 30,
+      "text": "Domain\nService", "fontSize": 13, "fontFamily": 1, "strokeColor": "#1e1e1e",
+      "textAlign": "center", "containerId": "w-svc"
+    },
+    {
+      "type": "arrow", "id": "a-w3", "x": 410, "y": 145, "width": 30, "height": 0,
+      "points": [[0,0],[30,0]], "strokeColor": "#15803d", "endArrowhead": "arrow"
+    },
+
+    {
+      "type": "rectangle", "id": "w-tx", "x": 440, "y": 110, "width": 260, "height": 80,
+      "backgroundColor": "#fff3bf", "fillStyle": "solid", "roundness": {"type": 3},
+      "strokeColor": "#f59e0b", "strokeWidth": 2
+    },
+    {
+      "type": "text", "id": "w-tx-title", "x": 490, "y": 113, "width": 160, "height": 16,
+      "text": "SINGLE TRANSACTION", "fontSize": 12, "fontFamily": 1, "strokeColor": "#b45309",
+      "textAlign": "center"
+    },
+    {
+      "type": "rectangle", "id": "w-insert", "x": 455, "y": 135, "width": 105, "height": 40,
+      "backgroundColor": "#ffc9c9", "fillStyle": "solid", "roundness": {"type": 3},
+      "strokeColor": "#ef4444"
+    },
+    {
+      "type": "text", "id": "w-insert-lbl", "x": 465, "y": 140, "width": 85, "height": 30,
+      "text": "INSERT\nDomain Table", "fontSize": 11, "fontFamily": 3, "strokeColor": "#1e1e1e",
+      "textAlign": "center", "containerId": "w-insert"
+    },
+    {
+      "type": "rectangle", "id": "w-outbox", "x": 575, "y": 135, "width": 110, "height": 40,
+      "backgroundColor": "#ffd8a8", "fillStyle": "solid", "roundness": {"type": 3},
+      "strokeColor": "#f59e0b"
+    },
+    {
+      "type": "text", "id": "w-outbox-lbl", "x": 585, "y": 140, "width": 90, "height": 30,
+      "text": "INSERT\nsync_outbox", "fontSize": 11, "fontFamily": 3, "strokeColor": "#1e1e1e",
+      "textAlign": "center", "containerId": "w-outbox"
+    },
+    {
+      "type": "text", "id": "w-plus", "x": 563, "y": 145, "width": 15, "height": 20,
+      "text": "+", "fontSize": 18, "fontFamily": 1, "strokeColor": "#b45309"
+    },
+
+    {
+      "type": "arrow", "id": "a-w4", "x": 700, "y": 145, "width": 30, "height": 0,
+      "points": [[0,0],[30,0]], "strokeColor": "#15803d", "endArrowhead": "arrow"
+    },
+    {
+      "type": "rectangle", "id": "w-ok", "x": 730, "y": 125, "width": 110, "height": 45,
+      "backgroundColor": "#d3f9d8", "fillStyle": "solid", "roundness": {"type": 3},
+      "strokeColor": "#22c55e"
+    },
+    {
+      "type": "text", "id": "w-ok-lbl", "x": 740, "y": 130, "width": 90, "height": 30,
+      "text": "200 OK\n< 1ms local", "fontSize": 12, "fontFamily": 1, "strokeColor": "#15803d",
+      "textAlign": "center", "containerId": "w-ok"
+    },
+
+    {
+      "type": "text", "id": "flow1-note", "x": 30, "y": 190, "width": 800, "height": 70,
+      "text": "El POS recibe respuesta inmediata. La sincronización con la nube ocurre después, en background.\nSi no hay internet, la orden queda en sync_outbox hasta que se restaure la conexión.\nCada registro en sync_outbox tiene: id (ULID), entity_type, entity_id, payload (JSON), created_at, synced_at (null)", "fontSize": 12, "fontFamily": 1, "strokeColor": "#495057"
+    },
+
+    {
+      "type": "rectangle", "id": "flow2-zone", "x": 10, "y": 330, "width": 850, "height": 260,
+      "backgroundColor": "#fff3bf", "fillStyle": "solid", "roundness": {"type": 3},
+      "strokeColor": "#f59e0b", "strokeWidth": 1, "opacity": 25
+    },
+    {
+      "type": "text", "id": "flow2-title", "x": 20, "y": 335, "width": 450, "height": 22,
+      "text": "FLOW 2: Sync Push Path (Background Service)", "fontSize": 18, "fontFamily": 1, "strokeColor": "#b45309"
+    },
+
+    {
+      "type": "rectangle", "id": "s-timer", "x": 30, "y": 375, "width": 100, "height": 50,
+      "backgroundColor": "#ffd8a8", "fillStyle": "solid", "roundness": {"type": 3},
+      "strokeColor": "#f59e0b"
+    },
+    {
+      "type": "text", "id": "s-timer-lbl", "x": 40, "y": 385, "width": 80, "height": 30,
+      "text": "Timer\n(cada 5s)", "fontSize": 12, "fontFamily": 1, "strokeColor": "#1e1e1e",
+      "textAlign": "center", "containerId": "s-timer"
+    },
+    {
+      "type": "arrow", "id": "a-s1", "x": 130, "y": 400, "width": 25, "height": 0,
+      "points": [[0,0],[25,0]], "strokeColor": "#f59e0b", "endArrowhead": "arrow"
+    },
+
+    {
+      "type": "diamond", "id": "s-check", "x": 155, "y": 370, "width": 100, "height": 65,
+      "backgroundColor": "#fff3bf", "fillStyle": "solid", "strokeColor": "#f59e0b"
+    },
+    {
+      "type": "text", "id": "s-check-lbl", "x": 173, "y": 390, "width": 65, "height": 20,
+      "text": "Internet?", "fontSize": 12, "fontFamily": 1, "strokeColor": "#1e1e1e",
+      "textAlign": "center", "containerId": "s-check"
+    },
+
+    {
+      "type": "arrow", "id": "a-s-no", "x": 205, "y": 435, "width": 0, "height": 30,
+      "points": [[0,0],[0,30]], "strokeColor": "#ef4444", "endArrowhead": "arrow"
+    },
+    {
+      "type": "text", "id": "s-no-lbl", "x": 212, "y": 445, "width": 20, "height": 14,
+      "text": "NO", "fontSize": 10, "fontFamily": 1, "strokeColor": "#ef4444"
+    },
+    {
+      "type": "rectangle", "id": "s-skip", "x": 160, "y": 465, "width": 90, "height": 35,
+      "backgroundColor": "#ffc9c9", "fillStyle": "solid", "roundness": {"type": 3},
+      "strokeColor": "#ef4444"
+    },
+    {
+      "type": "text", "id": "s-skip-lbl", "x": 170, "y": 472, "width": 70, "height": 18,
+      "text": "Skip / Retry", "fontSize": 12, "fontFamily": 1, "strokeColor": "#c92a2a",
+      "textAlign": "center", "containerId": "s-skip"
+    },
+
+    {
+      "type": "arrow", "id": "a-s-yes", "x": 255, "y": 400, "width": 30, "height": 0,
+      "points": [[0,0],[30,0]], "strokeColor": "#22c55e", "endArrowhead": "arrow"
+    },
+    {
+      "type": "text", "id": "s-yes-lbl", "x": 260, "y": 385, "width": 20, "height": 14,
+      "text": "SÍ", "fontSize": 10, "fontFamily": 1, "strokeColor": "#22c55e"
+    },
+
+    {
+      "type": "rectangle", "id": "s-query", "x": 285, "y": 375, "width": 125, "height": 50,
+      "backgroundColor": "#ffc9c9", "fillStyle": "solid", "roundness": {"type": 3},
+      "strokeColor": "#ef4444"
+    },
+    {
+      "type": "text", "id": "s-query-lbl", "x": 295, "y": 380, "width": 105, "height": 40,
+      "text": "SELECT outbox\nWHERE !synced\nLIMIT 50", "fontSize": 11, "fontFamily": 3, "strokeColor": "#1e1e1e",
+      "textAlign": "center", "containerId": "s-query"
+    },
+    {
+      "type": "arrow", "id": "a-s2", "x": 410, "y": 400, "width": 25, "height": 0,
+      "points": [[0,0],[25,0]], "strokeColor": "#f59e0b", "endArrowhead": "arrow"
+    },
+
+    {
+      "type": "rectangle", "id": "s-batch", "x": 435, "y": 375, "width": 110, "height": 50,
+      "backgroundColor": "#ffd8a8", "fillStyle": "solid", "roundness": {"type": 3},
+      "strokeColor": "#f59e0b"
+    },
+    {
+      "type": "text", "id": "s-batch-lbl", "x": 445, "y": 385, "width": 90, "height": 30,
+      "text": "Batch\n(max 50 rows)", "fontSize": 12, "fontFamily": 1, "strokeColor": "#1e1e1e",
+      "textAlign": "center", "containerId": "s-batch"
+    },
+    {
+      "type": "arrow", "id": "a-s3", "x": 545, "y": 400, "width": 25, "height": 0,
+      "points": [[0,0],[25,0]], "strokeColor": "#f59e0b", "endArrowhead": "arrow"
+    },
+    {
+      "type": "text", "id": "a-s3-lbl", "x": 548, "y": 385, "width": 25, "height": 14,
+      "text": "POST", "fontSize": 10, "fontFamily": 3, "strokeColor": "#757575"
+    },
+
+    {
+      "type": "rectangle", "id": "s-cloud", "x": 570, "y": 370, "width": 135, "height": 60,
+      "backgroundColor": "#dbe4ff", "fillStyle": "solid", "roundness": {"type": 3},
+      "strokeColor": "#4a9eed"
+    },
+    {
+      "type": "text", "id": "s-cloud-lbl", "x": 580, "y": 378, "width": 115, "height": 44,
+      "text": "Cloud Sync API\nDedup by ULID\nUPSERT", "fontSize": 12, "fontFamily": 1, "strokeColor": "#1e1e1e",
+      "textAlign": "center", "containerId": "s-cloud"
+    },
+    {
+      "type": "arrow", "id": "a-s4", "x": 705, "y": 400, "width": 25, "height": 0,
+      "points": [[0,0],[25,0]], "strokeColor": "#22c55e", "endArrowhead": "arrow"
+    },
+
+    {
+      "type": "rectangle", "id": "s-ack", "x": 730, "y": 375, "width": 115, "height": 50,
+      "backgroundColor": "#d3f9d8", "fillStyle": "solid", "roundness": {"type": 3},
+      "strokeColor": "#22c55e"
+    },
+    {
+      "type": "text", "id": "s-ack-lbl", "x": 740, "y": 380, "width": 95, "height": 40,
+      "text": "ACK + watermark\nMark synced_at", "fontSize": 11, "fontFamily": 3, "strokeColor": "#1e1e1e",
+      "textAlign": "center", "containerId": "s-ack"
+    },
+
+    {
+      "type": "text", "id": "flow2-note", "x": 30, "y": 510, "width": 800, "height": 55,
+      "text": "Watermark: cada lado guarda el último sequence_number procesado.\nAl reconectar, el sync resume desde el watermark (no retransmite todo).\nIdempotencia garantizada por ULID/UUID como primary key (UPSERT = INSERT ON CONFLICT UPDATE).", "fontSize": 12, "fontFamily": 1, "strokeColor": "#495057"
+    },
+
+    {
+      "type": "rectangle", "id": "flow3-zone", "x": 10, "y": 610, "width": 850, "height": 200,
+      "backgroundColor": "#dbe4ff", "fillStyle": "solid", "roundness": {"type": 3},
+      "strokeColor": "#4a9eed", "strokeWidth": 1, "opacity": 25
+    },
+    {
+      "type": "text", "id": "flow3-title", "x": 20, "y": 615, "width": 500, "height": 22,
+      "text": "FLOW 3: Pull Path (Cloud → Local, Menú y Precios)", "fontSize": 18, "fontFamily": 1, "strokeColor": "#2563eb"
+    },
+
+    {
+      "type": "rectangle", "id": "p-cloud", "x": 30, "y": 655, "width": 130, "height": 50,
+      "backgroundColor": "#dbe4ff", "fillStyle": "solid", "roundness": {"type": 3},
+      "strokeColor": "#4a9eed"
+    },
+    {
+      "type": "text", "id": "p-cloud-lbl", "x": 40, "y": 665, "width": 110, "height": 30,
+      "text": "Cloud DB\n(fuente verdad)", "fontSize": 12, "fontFamily": 1, "strokeColor": "#1e1e1e",
+      "textAlign": "center", "containerId": "p-cloud"
+    },
+    {
+      "type": "arrow", "id": "a-p1", "x": 160, "y": 680, "width": 35, "height": 0,
+      "points": [[0,0],[35,0]], "strokeColor": "#4a9eed", "endArrowhead": "arrow"
+    },
+    {
+      "type": "text", "id": "a-p1-lbl", "x": 160, "y": 663, "width": 40, "height": 14,
+      "text": "GET", "fontSize": 10, "fontFamily": 3, "strokeColor": "#757575"
+    },
+
+    {
+      "type": "rectangle", "id": "p-api", "x": 195, "y": 655, "width": 140, "height": 50,
+      "backgroundColor": "#dbe4ff", "fillStyle": "solid", "roundness": {"type": 3},
+      "strokeColor": "#4a9eed"
+    },
+    {
+      "type": "text", "id": "p-api-lbl", "x": 205, "y": 660, "width": 120, "height": 40,
+      "text": "Cloud Sync API\n/changes?since=wm", "fontSize": 11, "fontFamily": 3, "strokeColor": "#1e1e1e",
+      "textAlign": "center", "containerId": "p-api"
+    },
+    {
+      "type": "arrow", "id": "a-p2", "x": 335, "y": 680, "width": 35, "height": 0,
+      "points": [[0,0],[35,0]], "strokeColor": "#4a9eed", "endArrowhead": "arrow"
+    },
+
+    {
+      "type": "rectangle", "id": "p-inet", "x": 370, "y": 660, "width": 90, "height": 40,
+      "backgroundColor": "#ffc9c9", "fillStyle": "solid", "roundness": {"type": 3},
+      "strokeColor": "#ef4444"
+    },
+    {
+      "type": "text", "id": "p-inet-lbl", "x": 385, "y": 670, "width": 60, "height": 18,
+      "text": "Internet", "fontSize": 13, "fontFamily": 1, "strokeColor": "#c92a2a",
+      "textAlign": "center", "containerId": "p-inet"
+    },
+    {
+      "type": "arrow", "id": "a-p3", "x": 460, "y": 680, "width": 35, "height": 0,
+      "points": [[0,0],[35,0]], "strokeColor": "#4a9eed", "endArrowhead": "arrow"
+    },
+
+    {
+      "type": "rectangle", "id": "p-pull", "x": 495, "y": 655, "width": 130, "height": 50,
+      "backgroundColor": "#ffd8a8", "fillStyle": "solid", "roundness": {"type": 3},
+      "strokeColor": "#f59e0b"
+    },
+    {
+      "type": "text", "id": "p-pull-lbl", "x": 505, "y": 660, "width": 110, "height": 40,
+      "text": "Pull Receiver\n(Local Hub)", "fontSize": 12, "fontFamily": 1, "strokeColor": "#1e1e1e",
+      "textAlign": "center", "containerId": "p-pull"
+    },
+    {
+      "type": "arrow", "id": "a-p4", "x": 625, "y": 680, "width": 35, "height": 0,
+      "points": [[0,0],[35,0]], "strokeColor": "#f59e0b", "endArrowhead": "arrow"
+    },
+
+    {
+      "type": "rectangle", "id": "p-upsert", "x": 660, "y": 655, "width": 180, "height": 50,
+      "backgroundColor": "#ffc9c9", "fillStyle": "solid", "roundness": {"type": 3},
+      "strokeColor": "#ef4444"
+    },
+    {
+      "type": "text", "id": "p-upsert-lbl", "x": 670, "y": 660, "width": 160, "height": 40,
+      "text": "UPSERT Local PG\nUpdate watermark", "fontSize": 12, "fontFamily": 1, "strokeColor": "#1e1e1e",
+      "textAlign": "center", "containerId": "p-upsert"
+    },
+
+    {
+      "type": "text", "id": "flow3-note", "x": 30, "y": 720, "width": 800, "height": 70,
+      "text": "Datos que fluyen Cloud→Local: productos, categorías, precios, configuración de menú.\nDatos que fluyen Local→Cloud: órdenes, pagos, movimientos de inventario.\nConflictos por dominio: Orders=append-only, Modifications=last-write-wins, Payments=idempotent TX ID, Inventory=delta-based.", "fontSize": 12, "fontFamily": 1, "strokeColor": "#495057"
+    }
+  ],
+  "appState": {
+    "viewBackgroundColor": "#ffffff",
+    "gridSize": null
+  },
+  "files": {}
+}

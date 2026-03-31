@@ -1,0 +1,61 @@
+name: NuGet Consume Validation
+
+on:
+  workflow_run:
+    workflows: ["NuGet Pack & Push"]
+    types: [completed]
+  workflow_dispatch:
+
+env:
+  DOTNET_VERSION: '10.0.x'
+
+jobs:
+  build-as-consumer:
+    runs-on: ubuntu-latest
+    if: ${{ github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success' }}
+    permissions:
+      packages: read
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }}
+
+      - name: Authenticate NuGet (GitHub Packages)
+        run: >
+          dotnet nuget add source
+          "https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json"
+          --name github
+          --username ${{ github.actor }}
+          --password ${{ secrets.GITHUB_TOKEN }}
+          --store-password-in-clear-text
+
+      # Restore using NuGet packages (NOT project references)
+      - name: Restore LocalPOS (NuGet mode)
+        run: >
+          dotnet restore src/Hosts/Pos.Host.LocalPOS
+          -p:UseProjectReference=false
+
+      - name: Build LocalPOS (NuGet mode)
+        run: >
+          dotnet build src/Hosts/Pos.Host.LocalPOS
+          -c Release --no-restore
+          -p:UseProjectReference=false
+
+      # Restore using NuGet packages (NOT project references)
+      - name: Restore CloudHub (NuGet mode)
+        run: >
+          dotnet restore src/Hosts/Pos.Host.CloudHub
+          -p:UseProjectReference=false
+
+      - name: Build CloudHub (NuGet mode)
+        run: >
+          dotnet build src/Hosts/Pos.Host.CloudHub
+          -c Release --no-restore
+          -p:UseProjectReference=false
+
+      - name: Validation passed
+        run: echo "Both hosts built successfully using NuGet PackageReferences!"

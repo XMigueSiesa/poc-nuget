@@ -1,0 +1,24 @@
+# Build outputs
+**/bin/
+**/obj/
+
+# IDE
+.vs/
+.vscode/
+*.user
+*.suo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# NuGet
+**/packages/
+*.nupkg
+
+# Secrets
+appsettings.Development.json
+*.env
+
+# Claude
+.claude/

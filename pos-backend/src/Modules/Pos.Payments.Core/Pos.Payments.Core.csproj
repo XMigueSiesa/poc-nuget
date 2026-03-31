@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <PackageId>Pos.Payments.Core</PackageId>
+    <Description>Payments module core: entities, services, EF config, endpoints</Description>
+    <IsPackable>true</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="$(EfCoreVersion)" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="$(NpgsqlEfVersion)" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(UseProjectReference)' == 'true'">
+    <ProjectReference Include="..\..\Shared\Pos.SharedKernel\Pos.SharedKernel.csproj" />
+    <ProjectReference Include="..\Pos.Payments.Contracts\Pos.Payments.Contracts.csproj" />
+  </ItemGroup>
+  <ItemGroup Condition="'$(UseProjectReference)' != 'true'">
+    <PackageReference Include="Pos.SharedKernel" Version="*" />
+    <PackageReference Include="Pos.Payments.Contracts" Version="*" />
+  </ItemGroup>
+</Project>

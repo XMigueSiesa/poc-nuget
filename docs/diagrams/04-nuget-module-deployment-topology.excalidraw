@@ -1,0 +1,351 @@
+{
+  "type": "excalidraw",
+  "version": 2,
+  "source": "claude-code",
+  "elements": [
+    {
+      "type": "text", "id": "title", "x": 120, "y": 0, "width": 600, "height": 35,
+      "text": "NuGet Module Deployment Topology", "fontSize": 28, "fontFamily": 1,
+      "strokeColor": "#1e1e1e", "textAlign": "center"
+    },
+    {
+      "type": "text", "id": "subtitle", "x": 150, "y": 40, "width": 550, "height": 20,
+      "text": "Mismo código, diferente topología: Cloud (N containers) vs Local (1 proceso)", "fontSize": 16, "fontFamily": 1,
+      "strokeColor": "#757575", "textAlign": "center"
+    },
+
+    {
+      "type": "rectangle", "id": "mono-zone", "x": 10, "y": 80, "width": 820, "height": 260,
+      "backgroundColor": "#fff3bf", "fillStyle": "solid", "roundness": {"type": 3},
+      "strokeColor": "#f59e0b", "strokeWidth": 1, "opacity": 20
+    },
+    {
+      "type": "text", "id": "mono-title", "x": 20, "y": 85, "width": 350, "height": 22,
+      "text": "MONOREPO (Código Fuente)", "fontSize": 18, "fontFamily": 1, "strokeColor": "#b45309"
+    },
+
+    {
+      "type": "rectangle", "id": "sk-pkg", "x": 30, "y": 120, "width": 170, "height": 90,
+      "backgroundColor": "#ffd8a8", "fillStyle": "solid", "roundness": {"type": 3},
+      "strokeColor": "#f59e0b"
+    },
+    {
+      "type": "text", "id": "sk-pkg-lbl", "x": 40, "y": 125, "width": 150, "height": 80,
+      "text": "Pos.SharedKernel\n─────────────\nBaseEntity\nIEventBus\nIDbConfigurator\nULID Generator", "fontSize": 11, "fontFamily": 3, "strokeColor": "#1e1e1e",
+      "textAlign": "center", "containerId": "sk-pkg"
+    },
+
+    {
+      "type": "rectangle", "id": "orders-pkg", "x": 220, "y": 120, "width": 180, "height": 90,
+      "backgroundColor": "#a5d8ff", "fillStyle": "solid", "roundness": {"type": 3},
+      "strokeColor": "#4a9eed"
+    },
+    {
+      "type": "text", "id": "orders-pkg-lbl", "x": 230, "y": 125, "width": 160, "height": 80,
+      "text": "Pos.Orders\n─────────────\nContracts (DTOs/Interfaces)\nCore (Entities/Services)\nAddOrdersModule()\nMapOrdersEndpoints()", "fontSize": 11, "fontFamily": 3, "strokeColor": "#1e1e1e",
+      "textAlign": "center", "containerId": "orders-pkg"
+    },
+
+    {
+      "type": "rectangle", "id": "products-pkg", "x": 420, "y": 120, "width": 180, "height": 90,
+      "backgroundColor": "#a5d8ff", "fillStyle": "solid", "roundness": {"type": 3},
+      "strokeColor": "#4a9eed"
+    },
+    {
+      "type": "text", "id": "products-pkg-lbl", "x": 430, "y": 125, "width": 160, "height": 80,
+      "text": "Pos.Products\n─────────────\nContracts (DTOs/Interfaces)\nCore (Entities/Services)\nAddProductsModule()\nMapProductsEndpoints()", "fontSize": 11, "fontFamily": 3, "strokeColor": "#1e1e1e",
+      "textAlign": "center", "containerId": "products-pkg"
+    },
+
+    {
+      "type": "rectangle", "id": "payments-pkg", "x": 620, "y": 120, "width": 190, "height": 90,
+      "backgroundColor": "#a5d8ff", "fillStyle": "solid", "roundness": {"type": 3},
+      "strokeColor": "#4a9eed"
+    },
+    {
+      "type": "text", "id": "payments-pkg-lbl", "x": 630, "y": 125, "width": 170, "height": 80,
+      "text": "Pos.Payments\n─────────────\nContracts (DTOs/Interfaces)\nCore (Entities/Services)\nAddPaymentsModule()\nMapPaymentsEndpoints()", "fontSize": 11, "fontFamily": 3, "strokeColor": "#1e1e1e",
+      "textAlign": "center", "containerId": "payments-pkg"
+    },
+
+    {
+      "type": "rectangle", "id": "sync-pkg", "x": 220, "y": 225, "width": 180, "height": 55,
+      "backgroundColor": "#ffd8a8", "fillStyle": "solid", "roundness": {"type": 3},
+      "strokeColor": "#f59e0b"
+    },
+    {
+      "type": "text", "id": "sync-pkg-lbl", "x": 230, "y": 230, "width": 160, "height": 44,
+      "text": "Pos.Sync\nOutbox, Push, Pull\nWatermark Tracking", "fontSize": 11, "fontFamily": 3, "strokeColor": "#1e1e1e",
+      "textAlign": "center", "containerId": "sync-pkg"
+    },
+
+    {
+      "type": "rectangle", "id": "infra-pkg", "x": 420, "y": 225, "width": 180, "height": 55,
+      "backgroundColor": "#ffd8a8", "fillStyle": "solid", "roundness": {"type": 3},
+      "strokeColor": "#f59e0b"
+    },
+    {
+      "type": "text", "id": "infra-pkg-lbl", "x": 430, "y": 230, "width": 160, "height": 44,
+      "text": "Pos.Infrastructure.Postgres\nEF Core Configuration\nMigration Runner", "fontSize": 11, "fontFamily": 3, "strokeColor": "#1e1e1e",
+      "textAlign": "center", "containerId": "infra-pkg"
+    },
+
+    {
+      "type": "rectangle", "id": "periph-pkg", "x": 620, "y": 225, "width": 190, "height": 55,
+      "backgroundColor": "#e5dbff", "fillStyle": "solid", "roundness": {"type": 3},
+      "strokeColor": "#8b5cf6"
+    },
+    {
+      "type": "text", "id": "periph-pkg-lbl", "x": 630, "y": 230, "width": 170, "height": 44,
+      "text": "Pos.Peripherals\nDrivers (Printer/Scanner)\nOnly used by LocalHub", "fontSize": 11, "fontFamily": 3, "strokeColor": "#1e1e1e",
+      "textAlign": "center", "containerId": "periph-pkg"
+    },
+
+    {
+      "type": "arrow", "id": "a-dep1", "x": 200, "y": 165, "width": 20, "height": 0,
+      "points": [[0,0],[20,0]], "strokeColor": "#757575", "strokeStyle": "dashed", "endArrowhead": "arrow"
+    },
+    {
+      "type": "arrow", "id": "a-dep2", "x": 200, "y": 150, "width": 220, "height": 0,
+      "points": [[0,0],[220,0]], "strokeColor": "#757575", "strokeStyle": "dashed", "endArrowhead": "arrow"
+    },
+    {
+      "type": "arrow", "id": "a-dep3", "x": 200, "y": 155, "width": 420, "height": 0,
+      "points": [[0,0],[420,0]], "strokeColor": "#757575", "strokeStyle": "dashed", "endArrowhead": "arrow"
+    },
+
+    {
+      "type": "rectangle", "id": "cicd-zone", "x": 310, "y": 360, "width": 220, "height": 55,
+      "backgroundColor": "#c3fae8", "fillStyle": "solid", "roundness": {"type": 3},
+      "strokeColor": "#06b6d4", "strokeWidth": 2
+    },
+    {
+      "type": "text", "id": "cicd-lbl", "x": 320, "y": 365, "width": 200, "height": 44,
+      "text": "CI/CD Pipeline\ndotnet pack → NuGet feed\ndotnet publish → Docker", "fontSize": 11, "fontFamily": 3, "strokeColor": "#1e1e1e",
+      "textAlign": "center", "containerId": "cicd-zone"
+    },
+    {
+      "type": "arrow", "id": "a-mono-ci", "x": 420, "y": 300, "width": 0, "height": 60,
+      "points": [[0,0],[0,60]], "strokeColor": "#06b6d4", "endArrowhead": "arrow", "strokeWidth": 2
+    },
+    {
+      "type": "text", "id": "a-ci-lbl", "x": 428, "y": 320, "width": 80, "height": 14,
+      "text": "dotnet build", "fontSize": 11, "fontFamily": 3, "strokeColor": "#06b6d4"
+    },
+
+    {
+      "type": "arrow", "id": "a-ci-cloud", "x": 350, "y": 415, "width": -130, "height": 70,
+      "points": [[0,0],[-130,70]], "strokeColor": "#4a9eed", "endArrowhead": "arrow", "strokeWidth": 2
+    },
+    {
+      "type": "arrow", "id": "a-ci-local", "x": 490, "y": 415, "width": 130, "height": 70,
+      "points": [[0,0],[130,70]], "strokeColor": "#22c55e", "endArrowhead": "arrow", "strokeWidth": 2
+    },
+
+    {
+      "type": "rectangle", "id": "cloud-zone", "x": 10, "y": 490, "width": 400, "height": 330,
+      "backgroundColor": "#dbe4ff", "fillStyle": "solid", "roundness": {"type": 3},
+      "strokeColor": "#4a9eed", "strokeWidth": 2, "opacity": 30
+    },
+    {
+      "type": "text", "id": "cloud-title", "x": 20, "y": 495, "width": 350, "height": 22,
+      "text": "CLOUD (N Containers Independientes)", "fontSize": 18, "fontFamily": 1, "strokeColor": "#2563eb"
+    },
+
+    {
+      "type": "rectangle", "id": "c-orders", "x": 25, "y": 530, "width": 180, "height": 80,
+      "backgroundColor": "#a5d8ff", "fillStyle": "solid", "roundness": {"type": 3},
+      "strokeColor": "#4a9eed"
+    },
+    {
+      "type": "text", "id": "c-orders-lbl", "x": 35, "y": 535, "width": 160, "height": 70,
+      "text": "Container: Orders\n──────────────\nPos.Orders.Core\nPos.SharedKernel\nPos.Infrastructure.PG\nRabbitMQ client", "fontSize": 10, "fontFamily": 3, "strokeColor": "#1e1e1e",
+      "textAlign": "center", "containerId": "c-orders"
+    },
+
+    {
+      "type": "rectangle", "id": "c-products", "x": 220, "y": 530, "width": 180, "height": 80,
+      "backgroundColor": "#a5d8ff", "fillStyle": "solid", "roundness": {"type": 3},
+      "strokeColor": "#4a9eed"
+    },
+    {
+      "type": "text", "id": "c-products-lbl", "x": 230, "y": 535, "width": 160, "height": 70,
+      "text": "Container: Products\n──────────────\nPos.Products.Core\nPos.SharedKernel\nPos.Infrastructure.PG\nRabbitMQ client", "fontSize": 10, "fontFamily": 3, "strokeColor": "#1e1e1e",
+      "textAlign": "center", "containerId": "c-products"
+    },
+
+    {
+      "type": "rectangle", "id": "c-payments", "x": 25, "y": 625, "width": 180, "height": 80,
+      "backgroundColor": "#a5d8ff", "fillStyle": "solid", "roundness": {"type": 3},
+      "strokeColor": "#4a9eed"
+    },
+    {
+      "type": "text", "id": "c-payments-lbl", "x": 35, "y": 630, "width": 160, "height": 70,
+      "text": "Container: Payments\n──────────────\nPos.Payments.Core\nPos.SharedKernel\nPos.Infrastructure.PG\nRabbitMQ client", "fontSize": 10, "fontFamily": 3, "strokeColor": "#1e1e1e",
+      "textAlign": "center", "containerId": "c-payments"
+    },
+
+    {
+      "type": "rectangle", "id": "c-sync", "x": 220, "y": 625, "width": 180, "height": 80,
+      "backgroundColor": "#ffd8a8", "fillStyle": "solid", "roundness": {"type": 3},
+      "strokeColor": "#f59e0b"
+    },
+    {
+      "type": "text", "id": "c-sync-lbl", "x": 230, "y": 630, "width": 160, "height": 70,
+      "text": "Container: Sync\n──────────────\nPos.Sync\nPos.SharedKernel\nPos.Infrastructure.PG\nReceives from LocalHubs", "fontSize": 10, "fontFamily": 3, "strokeColor": "#1e1e1e",
+      "textAlign": "center", "containerId": "c-sync"
+    },
+
+    {
+      "type": "ellipse", "id": "c-db", "x": 80, "y": 725, "width": 180, "height": 55,
+      "backgroundColor": "#ffc9c9", "fillStyle": "solid", "strokeColor": "#ef4444"
+    },
+    {
+      "type": "text", "id": "c-db-lbl", "x": 105, "y": 738, "width": 130, "height": 20,
+      "text": "PostgreSQL Cloud", "fontSize": 14, "fontFamily": 1, "strokeColor": "#1e1e1e",
+      "textAlign": "center", "containerId": "c-db"
+    },
+
+    {
+      "type": "rectangle", "id": "c-rabbit", "x": 290, "y": 730, "width": 100, "height": 45,
+      "backgroundColor": "#ffd8a8", "fillStyle": "solid", "roundness": {"type": 3},
+      "strokeColor": "#f59e0b"
+    },
+    {
+      "type": "text", "id": "c-rabbit-lbl", "x": 300, "y": 740, "width": 80, "height": 20,
+      "text": "RabbitMQ", "fontSize": 13, "fontFamily": 1, "strokeColor": "#1e1e1e",
+      "textAlign": "center", "containerId": "c-rabbit"
+    },
+
+    {
+      "type": "arrow", "id": "a-c-ord-db", "x": 115, "y": 610, "width": 45, "height": 115,
+      "points": [[0,0],[45,115]], "strokeColor": "#1e1e1e", "endArrowhead": "arrow"
+    },
+    {
+      "type": "arrow", "id": "a-c-prod-db", "x": 310, "y": 610, "width": -60, "height": 115,
+      "points": [[0,0],[-60,115]], "strokeColor": "#1e1e1e", "endArrowhead": "arrow"
+    },
+
+    {
+      "type": "rectangle", "id": "local-zone", "x": 430, "y": 490, "width": 400, "height": 330,
+      "backgroundColor": "#d3f9d8", "fillStyle": "solid", "roundness": {"type": 3},
+      "strokeColor": "#22c55e", "strokeWidth": 2, "opacity": 30
+    },
+    {
+      "type": "text", "id": "local-title", "x": 440, "y": 495, "width": 350, "height": 22,
+      "text": "LOCAL HUB (1 Proceso Único)", "fontSize": 18, "fontFamily": 1, "strokeColor": "#15803d"
+    },
+
+    {
+      "type": "rectangle", "id": "l-process", "x": 445, "y": 530, "width": 370, "height": 195,
+      "backgroundColor": "#d3f9d8", "fillStyle": "solid", "roundness": {"type": 3},
+      "strokeColor": "#22c55e", "opacity": 60
+    },
+    {
+      "type": "text", "id": "l-process-title", "x": 455, "y": 535, "width": 300, "height": 16,
+      "text": "Pos.Host.LocalHub (single process)", "fontSize": 13, "fontFamily": 1, "strokeColor": "#15803d"
+    },
+
+    {
+      "type": "rectangle", "id": "l-orders", "x": 460, "y": 558, "width": 105, "height": 38,
+      "backgroundColor": "#a5d8ff", "fillStyle": "solid", "roundness": {"type": 3},
+      "strokeColor": "#4a9eed"
+    },
+    {
+      "type": "text", "id": "l-orders-lbl", "x": 470, "y": 566, "width": 85, "height": 18,
+      "text": "Orders", "fontSize": 12, "fontFamily": 1, "strokeColor": "#1e1e1e",
+      "textAlign": "center", "containerId": "l-orders"
+    },
+    {
+      "type": "rectangle", "id": "l-products", "x": 580, "y": 558, "width": 105, "height": 38,
+      "backgroundColor": "#a5d8ff", "fillStyle": "solid", "roundness": {"type": 3},
+      "strokeColor": "#4a9eed"
+    },
+    {
+      "type": "text", "id": "l-products-lbl", "x": 590, "y": 566, "width": 85, "height": 18,
+      "text": "Products", "fontSize": 12, "fontFamily": 1, "strokeColor": "#1e1e1e",
+      "textAlign": "center", "containerId": "l-products"
+    },
+    {
+      "type": "rectangle", "id": "l-payments", "x": 700, "y": 558, "width": 105, "height": 38,
+      "backgroundColor": "#a5d8ff", "fillStyle": "solid", "roundness": {"type": 3},
+      "strokeColor": "#4a9eed"
+    },
+    {
+      "type": "text", "id": "l-payments-lbl", "x": 710, "y": 566, "width": 85, "height": 18,
+      "text": "Payments", "fontSize": 12, "fontFamily": 1, "strokeColor": "#1e1e1e",
+      "textAlign": "center", "containerId": "l-payments"
+    },
+
+    {
+      "type": "rectangle", "id": "l-sync", "x": 460, "y": 608, "width": 105, "height": 38,
+      "backgroundColor": "#ffd8a8", "fillStyle": "solid", "roundness": {"type": 3},
+      "strokeColor": "#f59e0b"
+    },
+    {
+      "type": "text", "id": "l-sync-lbl", "x": 470, "y": 616, "width": 85, "height": 18,
+      "text": "Sync Engine", "fontSize": 12, "fontFamily": 1, "strokeColor": "#1e1e1e",
+      "textAlign": "center", "containerId": "l-sync"
+    },
+    {
+      "type": "rectangle", "id": "l-periph", "x": 580, "y": 608, "width": 105, "height": 38,
+      "backgroundColor": "#e5dbff", "fillStyle": "solid", "roundness": {"type": 3},
+      "strokeColor": "#8b5cf6"
+    },
+    {
+      "type": "text", "id": "l-periph-lbl", "x": 590, "y": 616, "width": 85, "height": 18,
+      "text": "Peripherals", "fontSize": 12, "fontFamily": 1, "strokeColor": "#1e1e1e",
+      "textAlign": "center", "containerId": "l-periph"
+    },
+    {
+      "type": "rectangle", "id": "l-eventbus", "x": 700, "y": 608, "width": 105, "height": 38,
+      "backgroundColor": "#ffd8a8", "fillStyle": "solid", "roundness": {"type": 3},
+      "strokeColor": "#f59e0b"
+    },
+    {
+      "type": "text", "id": "l-eventbus-lbl", "x": 710, "y": 612, "width": 85, "height": 30,
+      "text": "InProcess\nEventBus", "fontSize": 11, "fontFamily": 1, "strokeColor": "#1e1e1e",
+      "textAlign": "center", "containerId": "l-eventbus"
+    },
+
+    {
+      "type": "rectangle", "id": "l-shared", "x": 460, "y": 660, "width": 345, "height": 25,
+      "backgroundColor": "#ffd8a8", "fillStyle": "solid", "roundness": {"type": 3},
+      "strokeColor": "#f59e0b"
+    },
+    {
+      "type": "text", "id": "l-shared-lbl", "x": 530, "y": 664, "width": 200, "height": 16,
+      "text": "SharedKernel + Infrastructure.PG", "fontSize": 11, "fontFamily": 3, "strokeColor": "#1e1e1e",
+      "textAlign": "center", "containerId": "l-shared"
+    },
+
+    {
+      "type": "ellipse", "id": "l-db", "x": 495, "y": 740, "width": 155, "height": 50,
+      "backgroundColor": "#ffc9c9", "fillStyle": "solid", "strokeColor": "#ef4444"
+    },
+    {
+      "type": "text", "id": "l-db-lbl", "x": 515, "y": 750, "width": 115, "height": 20,
+      "text": "PostgreSQL Local", "fontSize": 13, "fontFamily": 1, "strokeColor": "#1e1e1e",
+      "textAlign": "center", "containerId": "l-db"
+    },
+
+    {
+      "type": "arrow", "id": "a-l-proc-db", "x": 630, "y": 725, "width": 0, "height": 15,
+      "points": [[0,0],[0,15]], "strokeColor": "#1e1e1e", "endArrowhead": "arrow"
+    },
+
+    {
+      "type": "text", "id": "note-dev", "x": 10, "y": 840, "width": 820, "height": 70,
+      "text": "Directory.Build.props: en desarrollo local usa ProjectReference (debug directo), en CI usa PackageReference (NuGet feed privado).\nCloud: cada contenedor referencia SOLO su módulo + shared. Inter-servicio vía RabbitMQ.\nLocal Hub: referencia TODOS los módulos + peripherals. Inter-módulo vía InProcessEventBus (Channel<T>).", "fontSize": 12, "fontFamily": 1, "strokeColor": "#495057"
+    },
+    {
+      "type": "text", "id": "note-key-lbl", "x": 10, "y": 825, "width": 200, "height": 16,
+      "text": "Notas de Deployment:", "fontSize": 13, "fontFamily": 1, "strokeColor": "#b45309"
+    }
+  ],
+  "appState": {
+    "viewBackgroundColor": "#ffffff",
+    "gridSize": null
+  },
+  "files": {}
+}

@@ -1,0 +1,381 @@
+{
+  "type": "excalidraw",
+  "version": 2,
+  "source": "claude-code",
+  "elements": [
+    {
+      "type": "text", "id": "title", "x": 220, "y": 0, "width": 400, "height": 35,
+      "text": "POS System Architecture", "fontSize": 28, "fontFamily": 1,
+      "strokeColor": "#1e1e1e", "textAlign": "center"
+    },
+    {
+      "type": "text", "id": "subtitle", "x": 250, "y": 40, "width": 300, "height": 20,
+      "text": "Local-First with Cloud Sync", "fontSize": 16, "fontFamily": 1,
+      "strokeColor": "#757575", "textAlign": "center"
+    },
+
+    {
+      "type": "rectangle", "id": "cloud-zone", "x": 10, "y": 80, "width": 780, "height": 210,
+      "backgroundColor": "#dbe4ff", "fillStyle": "solid", "roundness": {"type": 3},
+      "strokeColor": "#4a9eed", "strokeWidth": 1, "opacity": 40
+    },
+    {
+      "type": "text", "id": "cloud-lbl", "x": 30, "y": 88, "width": 150, "height": 22,
+      "text": "NUBE (Cloud)", "fontSize": 18, "fontFamily": 1, "strokeColor": "#2563eb"
+    },
+
+    {
+      "type": "rectangle", "id": "api-gw", "x": 30, "y": 125, "width": 130, "height": 55,
+      "backgroundColor": "#d0bfff", "fillStyle": "solid", "roundness": {"type": 3},
+      "strokeColor": "#8b5cf6"
+    },
+    {
+      "type": "text", "id": "api-gw-lbl", "x": 52, "y": 140, "width": 90, "height": 20,
+      "text": "API Gateway", "fontSize": 14, "fontFamily": 1, "strokeColor": "#1e1e1e",
+      "textAlign": "center", "containerId": "api-gw"
+    },
+
+    {
+      "type": "rectangle", "id": "orders-svc", "x": 200, "y": 125, "width": 120, "height": 55,
+      "backgroundColor": "#a5d8ff", "fillStyle": "solid", "roundness": {"type": 3},
+      "strokeColor": "#4a9eed"
+    },
+    {
+      "type": "text", "id": "orders-svc-lbl", "x": 215, "y": 140, "width": 90, "height": 20,
+      "text": "Orders Svc", "fontSize": 14, "fontFamily": 1, "strokeColor": "#1e1e1e",
+      "textAlign": "center", "containerId": "orders-svc"
+    },
+    {
+      "type": "arrow", "id": "a-gw-ord", "x": 160, "y": 152, "width": 40, "height": 0,
+      "points": [[0,0],[40,0]], "strokeColor": "#757575", "endArrowhead": "arrow",
+      "startBinding": {"elementId": "api-gw", "focus": 0, "gap": 1},
+      "endBinding": {"elementId": "orders-svc", "focus": 0, "gap": 1}
+    },
+
+    {
+      "type": "rectangle", "id": "products-svc", "x": 350, "y": 125, "width": 120, "height": 55,
+      "backgroundColor": "#a5d8ff", "fillStyle": "solid", "roundness": {"type": 3},
+      "strokeColor": "#4a9eed"
+    },
+    {
+      "type": "text", "id": "products-svc-lbl", "x": 360, "y": 140, "width": 100, "height": 20,
+      "text": "Products Svc", "fontSize": 14, "fontFamily": 1, "strokeColor": "#1e1e1e",
+      "textAlign": "center", "containerId": "products-svc"
+    },
+    {
+      "type": "arrow", "id": "a-gw-prod", "x": 160, "y": 148, "width": 190, "height": 4,
+      "points": [[0,0],[190,4]], "strokeColor": "#757575", "endArrowhead": "arrow",
+      "startBinding": {"elementId": "api-gw", "focus": 0, "gap": 1},
+      "endBinding": {"elementId": "products-svc", "focus": 0, "gap": 1}
+    },
+
+    {
+      "type": "rectangle", "id": "payments-svc", "x": 500, "y": 125, "width": 120, "height": 55,
+      "backgroundColor": "#a5d8ff", "fillStyle": "solid", "roundness": {"type": 3},
+      "strokeColor": "#4a9eed"
+    },
+    {
+      "type": "text", "id": "payments-svc-lbl", "x": 508, "y": 140, "width": 100, "height": 20,
+      "text": "Payments Svc", "fontSize": 14, "fontFamily": 1, "strokeColor": "#1e1e1e",
+      "textAlign": "center", "containerId": "payments-svc"
+    },
+
+    {
+      "type": "rectangle", "id": "sync-cloud", "x": 650, "y": 125, "width": 120, "height": 55,
+      "backgroundColor": "#ffd8a8", "fillStyle": "solid", "roundness": {"type": 3},
+      "strokeColor": "#f59e0b"
+    },
+    {
+      "type": "text", "id": "sync-cloud-lbl", "x": 665, "y": 140, "width": 90, "height": 20,
+      "text": "Sync Service", "fontSize": 14, "fontFamily": 1, "strokeColor": "#1e1e1e",
+      "textAlign": "center", "containerId": "sync-cloud"
+    },
+
+    {
+      "type": "ellipse", "id": "cloud-db", "x": 300, "y": 210, "width": 160, "height": 60,
+      "backgroundColor": "#ffc9c9", "fillStyle": "solid", "strokeColor": "#ef4444"
+    },
+    {
+      "type": "text", "id": "cloud-db-lbl", "x": 320, "y": 225, "width": 120, "height": 20,
+      "text": "PostgreSQL Cloud", "fontSize": 14, "fontFamily": 1, "strokeColor": "#1e1e1e",
+      "textAlign": "center", "containerId": "cloud-db"
+    },
+    {
+      "type": "arrow", "id": "a-ord-db", "x": 260, "y": 180, "width": 80, "height": 35,
+      "points": [[0,0],[80,35]], "strokeColor": "#1e1e1e", "endArrowhead": "arrow"
+    },
+    {
+      "type": "arrow", "id": "a-prod-db", "x": 410, "y": 180, "width": -20, "height": 30,
+      "points": [[0,0],[-20,30]], "strokeColor": "#1e1e1e", "endArrowhead": "arrow"
+    },
+    {
+      "type": "arrow", "id": "a-sync-db", "x": 710, "y": 180, "width": -260, "height": 45,
+      "points": [[0,0],[-260,45]], "strokeColor": "#f59e0b", "strokeStyle": "dashed",
+      "endArrowhead": "arrow"
+    },
+    {
+      "type": "text", "id": "sync-db-lbl", "x": 520, "y": 192, "width": 120, "height": 16,
+      "text": "writes synced data", "fontSize": 12, "fontFamily": 1, "strokeColor": "#f59e0b"
+    },
+
+    {
+      "type": "rectangle", "id": "inet-bar", "x": 10, "y": 310, "width": 780, "height": 35,
+      "backgroundColor": "#ffc9c9", "fillStyle": "solid", "roundness": {"type": 3},
+      "strokeColor": "#ef4444", "strokeWidth": 1, "opacity": 60
+    },
+    {
+      "type": "text", "id": "inet-lbl", "x": 140, "y": 316, "width": 520, "height": 20,
+      "text": "INTERNET  (puede caerse en cualquier momento)", "fontSize": 14,
+      "fontFamily": 1, "strokeColor": "#c92a2a", "textAlign": "center"
+    },
+
+    {
+      "type": "rectangle", "id": "rest-zone", "x": 10, "y": 370, "width": 780, "height": 360,
+      "backgroundColor": "#d3f9d8", "fillStyle": "solid", "roundness": {"type": 3},
+      "strokeColor": "#22c55e", "strokeWidth": 1, "opacity": 30
+    },
+    {
+      "type": "text", "id": "rest-lbl", "x": 30, "y": 378, "width": 250, "height": 22,
+      "text": "RESTAURANTE (Red Local)", "fontSize": 18, "fontFamily": 1, "strokeColor": "#15803d"
+    },
+
+    {
+      "type": "rectangle", "id": "hub-zone", "x": 30, "y": 410, "width": 460, "height": 280,
+      "backgroundColor": "#d3f9d8", "fillStyle": "solid", "roundness": {"type": 3},
+      "strokeColor": "#22c55e", "strokeWidth": 1, "opacity": 50
+    },
+    {
+      "type": "text", "id": "hub-lbl", "x": 50, "y": 418, "width": 200, "height": 20,
+      "text": "LOCAL HUB (.NET)", "fontSize": 16, "fontFamily": 1, "strokeColor": "#15803d"
+    },
+
+    {
+      "type": "rectangle", "id": "hub-orders", "x": 50, "y": 450, "width": 125, "height": 50,
+      "backgroundColor": "#a5d8ff", "fillStyle": "solid", "roundness": {"type": 3},
+      "strokeColor": "#4a9eed"
+    },
+    {
+      "type": "text", "id": "hub-orders-lbl", "x": 60, "y": 462, "width": 105, "height": 20,
+      "text": "Orders Module", "fontSize": 14, "fontFamily": 1, "strokeColor": "#1e1e1e",
+      "textAlign": "center", "containerId": "hub-orders"
+    },
+
+    {
+      "type": "rectangle", "id": "hub-products", "x": 195, "y": 450, "width": 130, "height": 50,
+      "backgroundColor": "#a5d8ff", "fillStyle": "solid", "roundness": {"type": 3},
+      "strokeColor": "#4a9eed"
+    },
+    {
+      "type": "text", "id": "hub-products-lbl", "x": 200, "y": 462, "width": 120, "height": 20,
+      "text": "Products Module", "fontSize": 14, "fontFamily": 1, "strokeColor": "#1e1e1e",
+      "textAlign": "center", "containerId": "hub-products"
+    },
+
+    {
+      "type": "rectangle", "id": "hub-payments", "x": 345, "y": 450, "width": 130, "height": 50,
+      "backgroundColor": "#a5d8ff", "fillStyle": "solid", "roundness": {"type": 3},
+      "strokeColor": "#4a9eed"
+    },
+    {
+      "type": "text", "id": "hub-payments-lbl", "x": 350, "y": 462, "width": 120, "height": 20,
+      "text": "Payments Module", "fontSize": 14, "fontFamily": 1, "strokeColor": "#1e1e1e",
+      "textAlign": "center", "containerId": "hub-payments"
+    },
+
+    {
+      "type": "ellipse", "id": "local-db", "x": 50, "y": 535, "width": 155, "height": 55,
+      "backgroundColor": "#ffc9c9", "fillStyle": "solid", "strokeColor": "#ef4444"
+    },
+    {
+      "type": "text", "id": "local-db-lbl", "x": 65, "y": 548, "width": 125, "height": 20,
+      "text": "PostgreSQL Local", "fontSize": 14, "fontFamily": 1, "strokeColor": "#1e1e1e",
+      "textAlign": "center", "containerId": "local-db"
+    },
+    {
+      "type": "arrow", "id": "a-hord-db", "x": 112, "y": 500, "width": 0, "height": 35,
+      "points": [[0,0],[0,35]], "strokeColor": "#1e1e1e", "endArrowhead": "arrow"
+    },
+    {
+      "type": "arrow", "id": "a-hprod-db", "x": 260, "y": 500, "width": -100, "height": 40,
+      "points": [[0,0],[-100,40]], "strokeColor": "#1e1e1e", "endArrowhead": "arrow"
+    },
+
+    {
+      "type": "rectangle", "id": "sync-local", "x": 240, "y": 535, "width": 130, "height": 55,
+      "backgroundColor": "#ffd8a8", "fillStyle": "solid", "roundness": {"type": 3},
+      "strokeColor": "#f59e0b"
+    },
+    {
+      "type": "text", "id": "sync-local-lbl", "x": 255, "y": 543, "width": 100, "height": 40,
+      "text": "Sync Service\n(Background)", "fontSize": 13, "fontFamily": 1, "strokeColor": "#1e1e1e",
+      "textAlign": "center", "containerId": "sync-local"
+    },
+    {
+      "type": "arrow", "id": "a-db-sync", "x": 205, "y": 562, "width": 35, "height": 0,
+      "points": [[0,0],[35,0]], "strokeColor": "#f59e0b", "strokeStyle": "dashed",
+      "endArrowhead": "arrow"
+    },
+    {
+      "type": "text", "id": "outbox-lbl", "x": 208, "y": 548, "width": 40, "height": 14,
+      "text": "outbox", "fontSize": 11, "fontFamily": 1, "strokeColor": "#f59e0b"
+    },
+
+    {
+      "type": "arrow", "id": "a-sync-up", "x": 305, "y": 535, "width": 0, "height": -190,
+      "points": [[0,0],[0,-190]], "strokeColor": "#f59e0b", "strokeStyle": "dashed",
+      "endArrowhead": "arrow"
+    },
+    {
+      "type": "text", "id": "sync-up-lbl", "x": 312, "y": 430, "width": 100, "height": 14,
+      "text": "sync when online", "fontSize": 11, "fontFamily": 1, "strokeColor": "#f59e0b"
+    },
+
+    {
+      "type": "rectangle", "id": "periph-mgr", "x": 395, "y": 535, "width": 80, "height": 55,
+      "backgroundColor": "#d0bfff", "fillStyle": "solid", "roundness": {"type": 3},
+      "strokeColor": "#8b5cf6"
+    },
+    {
+      "type": "text", "id": "periph-mgr-lbl", "x": 400, "y": 543, "width": 70, "height": 40,
+      "text": "Peripheral\nManager", "fontSize": 12, "fontFamily": 1, "strokeColor": "#1e1e1e",
+      "textAlign": "center", "containerId": "periph-mgr"
+    },
+
+    {
+      "type": "rectangle", "id": "periph-zone", "x": 510, "y": 410, "width": 260, "height": 280,
+      "backgroundColor": "#e5dbff", "fillStyle": "solid", "roundness": {"type": 3},
+      "strokeColor": "#8b5cf6", "strokeWidth": 1, "opacity": 35
+    },
+    {
+      "type": "text", "id": "periph-title", "x": 530, "y": 418, "width": 120, "height": 20,
+      "text": "PERIFERICOS", "fontSize": 16, "fontFamily": 1, "strokeColor": "#6d28d9"
+    },
+
+    {
+      "type": "rectangle", "id": "printer", "x": 530, "y": 450, "width": 105, "height": 45,
+      "backgroundColor": "#d0bfff", "fillStyle": "solid", "roundness": {"type": 3},
+      "strokeColor": "#8b5cf6"
+    },
+    {
+      "type": "text", "id": "printer-lbl", "x": 540, "y": 460, "width": 85, "height": 20,
+      "text": "Impresora", "fontSize": 14, "fontFamily": 1, "strokeColor": "#1e1e1e",
+      "textAlign": "center", "containerId": "printer"
+    },
+
+    {
+      "type": "rectangle", "id": "scanner", "x": 655, "y": 450, "width": 100, "height": 45,
+      "backgroundColor": "#d0bfff", "fillStyle": "solid", "roundness": {"type": 3},
+      "strokeColor": "#8b5cf6"
+    },
+    {
+      "type": "text", "id": "scanner-lbl", "x": 670, "y": 460, "width": 70, "height": 20,
+      "text": "Escaner", "fontSize": 14, "fontFamily": 1, "strokeColor": "#1e1e1e",
+      "textAlign": "center", "containerId": "scanner"
+    },
+
+    {
+      "type": "rectangle", "id": "cash-drawer", "x": 530, "y": 520, "width": 105, "height": 45,
+      "backgroundColor": "#d0bfff", "fillStyle": "solid", "roundness": {"type": 3},
+      "strokeColor": "#8b5cf6"
+    },
+    {
+      "type": "text", "id": "cash-lbl", "x": 552, "y": 530, "width": 60, "height": 20,
+      "text": "Cajon", "fontSize": 14, "fontFamily": 1, "strokeColor": "#1e1e1e",
+      "textAlign": "center", "containerId": "cash-drawer"
+    },
+
+    {
+      "type": "rectangle", "id": "kitchen", "x": 655, "y": 520, "width": 100, "height": 45,
+      "backgroundColor": "#d0bfff", "fillStyle": "solid", "roundness": {"type": 3},
+      "strokeColor": "#8b5cf6"
+    },
+    {
+      "type": "text", "id": "kitchen-lbl", "x": 668, "y": 530, "width": 75, "height": 20,
+      "text": "Cocina", "fontSize": 14, "fontFamily": 1, "strokeColor": "#1e1e1e",
+      "textAlign": "center", "containerId": "kitchen"
+    },
+
+    {
+      "type": "arrow", "id": "a-pm-pr", "x": 475, "y": 555, "width": 55, "height": -80,
+      "points": [[0,0],[55,-80]], "strokeColor": "#8b5cf6", "endArrowhead": "arrow"
+    },
+    {
+      "type": "arrow", "id": "a-pm-sc", "x": 475, "y": 555, "width": 180, "height": -80,
+      "points": [[0,0],[180,-80]], "strokeColor": "#8b5cf6", "endArrowhead": "arrow"
+    },
+    {
+      "type": "arrow", "id": "a-pm-cd", "x": 475, "y": 560, "width": 55, "height": -15,
+      "points": [[0,0],[55,-15]], "strokeColor": "#8b5cf6", "endArrowhead": "arrow"
+    },
+    {
+      "type": "arrow", "id": "a-pm-kd", "x": 475, "y": 560, "width": 180, "height": -15,
+      "points": [[0,0],[180,-15]], "strokeColor": "#8b5cf6", "endArrowhead": "arrow"
+    },
+
+    {
+      "type": "rectangle", "id": "pos-t1", "x": 40, "y": 630, "width": 110, "height": 50,
+      "backgroundColor": "#c3fae8", "fillStyle": "solid", "roundness": {"type": 3},
+      "strokeColor": "#06b6d4"
+    },
+    {
+      "type": "text", "id": "pos-t1-lbl", "x": 55, "y": 643, "width": 80, "height": 20,
+      "text": "POS Web", "fontSize": 14, "fontFamily": 1, "strokeColor": "#1e1e1e",
+      "textAlign": "center", "containerId": "pos-t1"
+    },
+
+    {
+      "type": "rectangle", "id": "pos-t2", "x": 175, "y": 630, "width": 120, "height": 50,
+      "backgroundColor": "#c3fae8", "fillStyle": "solid", "roundness": {"type": 3},
+      "strokeColor": "#06b6d4"
+    },
+    {
+      "type": "text", "id": "pos-t2-lbl", "x": 185, "y": 643, "width": 100, "height": 20,
+      "text": "POS Android", "fontSize": 14, "fontFamily": 1, "strokeColor": "#1e1e1e",
+      "textAlign": "center", "containerId": "pos-t2"
+    },
+
+    {
+      "type": "rectangle", "id": "pos-t3", "x": 320, "y": 630, "width": 100, "height": 50,
+      "backgroundColor": "#c3fae8", "fillStyle": "solid", "roundness": {"type": 3},
+      "strokeColor": "#06b6d4"
+    },
+    {
+      "type": "text", "id": "pos-t3-lbl", "x": 340, "y": 643, "width": 60, "height": 20,
+      "text": "POS iOS", "fontSize": 14, "fontFamily": 1, "strokeColor": "#1e1e1e",
+      "textAlign": "center", "containerId": "pos-t3"
+    },
+
+    {
+      "type": "rectangle", "id": "pos-admin", "x": 445, "y": 630, "width": 120, "height": 50,
+      "backgroundColor": "#c3fae8", "fillStyle": "solid", "roundness": {"type": 3},
+      "strokeColor": "#06b6d4"
+    },
+    {
+      "type": "text", "id": "pos-admin-lbl", "x": 455, "y": 643, "width": 100, "height": 20,
+      "text": "Admin Panel", "fontSize": 14, "fontFamily": 1, "strokeColor": "#1e1e1e",
+      "textAlign": "center", "containerId": "pos-admin"
+    },
+
+    {
+      "type": "arrow", "id": "a-t1-hub", "x": 95, "y": 630, "width": 30, "height": -40,
+      "points": [[0,0],[30,-40]], "strokeColor": "#06b6d4", "endArrowhead": "arrow"
+    },
+    {
+      "type": "arrow", "id": "a-t2-hub", "x": 235, "y": 630, "width": 0, "height": -40,
+      "points": [[0,0],[0,-40]], "strokeColor": "#06b6d4", "endArrowhead": "arrow"
+    },
+    {
+      "type": "arrow", "id": "a-t3-hub", "x": 370, "y": 630, "width": -30, "height": -40,
+      "points": [[0,0],[-30,-40]], "strokeColor": "#06b6d4", "endArrowhead": "arrow"
+    },
+    {
+      "type": "text", "id": "http-lbl", "x": 100, "y": 605, "width": 80, "height": 14,
+      "text": "HTTP / REST", "fontSize": 12, "fontFamily": 1, "strokeColor": "#06b6d4"
+    }
+  ],
+  "appState": {
+    "viewBackgroundColor": "#ffffff",
+    "gridSize": null
+  },
+  "files": {}
+}

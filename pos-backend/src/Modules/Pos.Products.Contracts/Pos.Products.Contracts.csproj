@@ -1,0 +1,7 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <PackageId>Pos.Products.Contracts</PackageId>
+    <Description>Products module contracts: DTOs and interfaces</Description>
+    <IsPackable>true</IsPackable>
+  </PropertyGroup>
+</Project>
