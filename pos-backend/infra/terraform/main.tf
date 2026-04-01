@@ -1,5 +1,5 @@
 # ---------------------------------------------------------------------------
-# main.tf — Provider and backend configuration
+# main.tf — provider and backend for SIESA POS infrastructure
 # ---------------------------------------------------------------------------
 
 terraform {

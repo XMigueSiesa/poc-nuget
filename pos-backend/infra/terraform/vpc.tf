@@ -1,34 +1,43 @@
 # ---------------------------------------------------------------------------
-# vpc.tf — VPC, subnet, and Serverless VPC Access connector
+# vpc.tf — VPC, subnet, VPC Access Connector, private service networking
 # ---------------------------------------------------------------------------
 
 resource "google_compute_network" "pos_vpc" {
   name                    = "pos-vpc"
   auto_create_subnetworks = false
-  description             = "SIESA POS private network"
 }
 
 resource "google_compute_subnetwork" "pos_subnet" {
   name          = "pos-subnet"
+  ip_cidr_range = "10.0.0.0/24"
   region        = var.region
   network       = google_compute_network.pos_vpc.id
-  ip_cidr_range = "10.8.0.0/24"
 
   private_ip_google_access = true
 }
 
-# Serverless VPC Access connector — allows Cloud Run to reach Cloud SQL via private IP
+# VPC Access Connector — allows Cloud Run to reach private resources
 resource "google_vpc_access_connector" "pos_connector" {
-  name   = "pos-connector"
-  region = var.region
+  name          = "pos-vpc-connector"
+  region        = var.region
+  ip_cidr_range = "10.8.0.0/28"
+  network       = google_compute_network.pos_vpc.name
 
-  subnet {
-    name = google_compute_subnetwork.pos_subnet.name
-  }
+  min_instances = 2
+  max_instances = 3
+}
 
-  ip_cidr_range  = "10.8.1.0/28"
-  min_throughput = 200
-  max_throughput = 1000
+# Private service networking — Cloud SQL private IP
+resource "google_compute_global_address" "private_ip_range" {
+  name          = "pos-private-ip-range"
+  purpose       = "VPC_PEERING"
+  address_type  = "INTERNAL"
+  prefix_length = 16
+  network       = google_compute_network.pos_vpc.id
+}
 
-  depends_on = [google_compute_subnetwork.pos_subnet]
+resource "google_service_networking_connection" "private_vpc_connection" {
+  network                 = google_compute_network.pos_vpc.id
+  service                 = "servicenetworking.googleapis.com"
+  reserved_peering_ranges = [google_compute_global_address.private_ip_range.name]
 }

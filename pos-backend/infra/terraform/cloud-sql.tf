@@ -1,54 +1,53 @@
 # ---------------------------------------------------------------------------
-# cloud-sql.tf — Cloud SQL PostgreSQL 17 instance, database, user, and
-#                private service connection
+# cloud-sql.tf — PostgreSQL 17 instance, database, and app user
 # ---------------------------------------------------------------------------
 
-# Reserve an IP range for the private service connection
-resource "google_compute_global_address" "private_ip_range" {
-  name          = "pos-private-ip-range"
-  purpose       = "VPC_PEERING"
-  address_type  = "INTERNAL"
-  prefix_length = 16
-  network       = google_compute_network.pos_vpc.id
+resource "random_password" "pos_app_password" {
+  length  = 32
+  special = false
 }
 
-# Establish the private service connection so Cloud SQL can use a private IP
-resource "google_service_networking_connection" "private_vpc_connection" {
-  network                 = google_compute_network.pos_vpc.id
-  service                 = "servicenetworking.googleapis.com"
-  reserved_peering_ranges = [google_compute_global_address.private_ip_range.name]
-
-  depends_on = [google_compute_global_address.private_ip_range]
-}
-
-# Random password for the application database user
-resource "random_password" "db_user_password" {
-  length           = 32
-  special          = true
-  override_special = "!#$%&*()-_=+[]{}<>:?"
-}
-
-# Cloud SQL PostgreSQL 17 instance
-resource "google_sql_database_instance" "pos" {
-  name             = "pos-cloud-sql"
+resource "google_sql_database_instance" "pos_db" {
+  name             = "pos-db-${var.environment}"
   database_version = "POSTGRES_17"
   region           = var.region
+
+  deletion_protection = true
+
+  depends_on = [google_service_networking_connection.private_vpc_connection]
 
   settings {
     tier              = var.db_tier
     availability_type = "REGIONAL"
-    disk_autoresize   = true
-    disk_size         = 20
-    disk_type         = "PD_SSD"
+    edition           = "ENTERPRISE"
+
+    ip_configuration {
+      ipv4_enabled                                  = false
+      private_network                               = google_compute_network.pos_vpc.id
+      enable_private_path_for_google_cloud_services = true
+    }
+
+    disk_autoresize       = true
+    disk_autoresize_limit = 100
+    disk_size             = 10
+    disk_type             = "PD_SSD"
 
     backup_configuration {
       enabled                        = true
       point_in_time_recovery_enabled = true
+      start_time                     = "04:00"
       transaction_log_retention_days = 7
+
       backup_retention_settings {
         retained_backups = 14
         retention_unit   = "COUNT"
       }
+    }
+
+    maintenance_window {
+      day          = 7 # Sunday
+      hour         = 4 # 04:00 UTC
+      update_track = "stable"
     }
 
     database_flags {
@@ -56,9 +55,14 @@ resource "google_sql_database_instance" "pos" {
       value = "1000"
     }
 
-    ip_configuration {
-      ipv4_enabled    = false
-      private_network = google_compute_network.pos_vpc.id
+    database_flags {
+      name  = "log_connections"
+      value = "on"
+    }
+
+    database_flags {
+      name  = "log_disconnections"
+      value = "on"
     }
 
     insights_config {
@@ -68,23 +72,17 @@ resource "google_sql_database_instance" "pos" {
       record_client_address   = false
     }
   }
-
-  deletion_protection = true
-
-  depends_on = [google_service_networking_connection.private_vpc_connection]
 }
 
-# Application database
 resource "google_sql_database" "pos_cloud" {
   name     = "pos_cloud"
-  instance = google_sql_database_instance.pos.name
+  instance = google_sql_database_instance.pos_db.name
 }
 
-# Application database user (no superuser privileges)
 resource "google_sql_user" "pos_app" {
   name     = "pos_app"
-  instance = google_sql_database_instance.pos.name
-  password = random_password.db_user_password.result
+  instance = google_sql_database_instance.pos_db.name
+  password = random_password.pos_app_password.result
 
   lifecycle {
     ignore_changes = [password]
