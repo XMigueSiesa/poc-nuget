@@ -1,10 +1,11 @@
 # ---------------------------------------------------------------------------
-# cloud-run.tf — CloudHub Cloud Run service
+# cloud-run.tf — Cloud Run service for Pos.Host.CloudHub
 # ---------------------------------------------------------------------------
 
-resource "google_cloud_run_v2_service" "cloudhub" {
+resource "google_cloud_run_v2_service" "pos_cloudhub" {
   name     = "pos-cloudhub"
   location = var.region
+  ingress  = "INGRESS_TRAFFIC_ALL"
 
   labels = {
     environment = var.environment
@@ -12,7 +13,7 @@ resource "google_cloud_run_v2_service" "cloudhub" {
   }
 
   template {
-    service_account = google_service_account.cloudhub_sa.email
+    service_account = google_service_account.cloudhub.email
 
     scaling {
       min_instance_count = var.min_instances
@@ -21,7 +22,14 @@ resource "google_cloud_run_v2_service" "cloudhub" {
 
     vpc_access {
       connector = google_vpc_access_connector.pos_connector.id
-      egress    = "ALL_TRAFFIC"
+      egress    = "PRIVATE_RANGES_ONLY"
+    }
+
+    volumes {
+      name = "cloudsql"
+      cloud_sql_instance {
+        instances = [google_sql_database_instance.pos_db.connection_name]
+      }
     }
 
     containers {
@@ -33,13 +41,12 @@ resource "google_cloud_run_v2_service" "cloudhub" {
 
       resources {
         limits = {
-          cpu    = "2"
-          memory = "1Gi"
+          cpu    = "1"
+          memory = "512Mi"
         }
         cpu_idle = true
       }
 
-      # Database connection string from Secret Manager
       env {
         name = "ConnectionStrings__CloudDb"
         value_source {
@@ -50,7 +57,6 @@ resource "google_cloud_run_v2_service" "cloudhub" {
         }
       }
 
-      # JWT signing key from Secret Manager
       env {
         name = "Auth__JwtSigningKey"
         value_source {
@@ -66,42 +72,47 @@ resource "google_cloud_run_v2_service" "cloudhub" {
         value = "Production"
       }
 
-      liveness_probe {
-        http_get {
-          path = "/health/live"
-        }
-        initial_delay_seconds = 10
-        period_seconds        = 30
-        failure_threshold     = 3
-        timeout_seconds       = 5
+      volume_mounts {
+        name       = "cloudsql"
+        mount_path = "/cloudsql"
       }
 
       startup_probe {
         http_get {
           path = "/health/ready"
+          port = 8080
         }
         initial_delay_seconds = 5
-        period_seconds        = 10
-        failure_threshold     = 3
-        timeout_seconds       = 5
+        period_seconds        = 5
+        failure_threshold     = 10
+        timeout_seconds       = 3
+      }
+
+      liveness_probe {
+        http_get {
+          path = "/health/live"
+          port = 8080
+        }
+        period_seconds    = 30
+        failure_threshold = 3
+        timeout_seconds   = 3
       }
     }
   }
 
   depends_on = [
-    google_vpc_access_connector.pos_connector,
-    google_secret_manager_secret_version.db_connection_string_placeholder,
-    google_secret_manager_secret_version.jwt_signing_key_initial,
-    google_secret_manager_secret_iam_member.cloudhub_sa_db_connection_string,
-    google_secret_manager_secret_iam_member.cloudhub_sa_jwt_signing_key,
+    google_secret_manager_secret_version.db_connection_string,
+    google_secret_manager_secret_version.jwt_signing_key,
+    google_secret_manager_secret_iam_member.db_conn_access,
+    google_secret_manager_secret_iam_member.jwt_key_access,
   ]
 }
 
-# Allow unauthenticated invocations — auth is handled at the app layer via JWT
-resource "google_cloud_run_v2_service_iam_member" "cloudhub_public_invoker" {
-  project  = google_cloud_run_v2_service.cloudhub.project
-  location = google_cloud_run_v2_service.cloudhub.location
-  name     = google_cloud_run_v2_service.cloudhub.name
+# Allow unauthenticated access — the application handles its own auth
+resource "google_cloud_run_v2_service_iam_member" "public_invoker" {
+  project  = var.project_id
+  location = var.region
+  name     = google_cloud_run_v2_service.pos_cloudhub.name
   role     = "roles/run.invoker"
   member   = "allUsers"
 }

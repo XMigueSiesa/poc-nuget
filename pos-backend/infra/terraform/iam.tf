@@ -1,15 +1,15 @@
 # ---------------------------------------------------------------------------
-# iam.tf — Service account and project-level IAM bindings for CloudHub
+# iam.tf — service account and role bindings for Cloud Run
 # ---------------------------------------------------------------------------
 
-resource "google_service_account" "cloudhub_sa" {
-  account_id   = "pos-cloudhub-sa"
-  display_name = "SIESA POS CloudHub Service Account"
-  description  = "Identity used by the CloudHub Cloud Run service to access GCP resources"
+resource "google_service_account" "cloudhub" {
+  account_id   = "pos-cloudhub"
+  display_name = "POS CloudHub Cloud Run"
+  description  = "Service account for the pos-cloudhub Cloud Run service"
 }
 
 locals {
-  cloudhub_sa_roles = [
+  cloudhub_roles = [
     "roles/cloudsql.client",
     "roles/secretmanager.secretAccessor",
     "roles/logging.logWriter",
@@ -18,10 +18,10 @@ locals {
   ]
 }
 
-resource "google_project_iam_member" "cloudhub_sa_roles" {
-  for_each = toset(local.cloudhub_sa_roles)
+resource "google_project_iam_member" "cloudhub_roles" {
+  for_each = toset(local.cloudhub_roles)
 
   project = var.project_id
   role    = each.value
-  member  = "serviceAccount:${google_service_account.cloudhub_sa.email}"
+  member  = "serviceAccount:${google_service_account.cloudhub.email}"
 }

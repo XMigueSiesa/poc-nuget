@@ -1,12 +1,12 @@
 # ---------------------------------------------------------------------------
-# artifact-registry.tf — Docker repository for CloudHub container images
+# artifact-registry.tf — Docker repository for POS container images
 # ---------------------------------------------------------------------------
 
-resource "google_artifact_registry_repository" "pos_containers" {
-  repository_id = "pos-containers"
+resource "google_artifact_registry_repository" "pos_images" {
   location      = var.region
+  repository_id = "pos-images"
   format        = "DOCKER"
-  description   = "SIESA POS container images"
+  description   = "Container images for SIESA POS services"
 
   labels = {
     environment = var.environment
@@ -14,7 +14,7 @@ resource "google_artifact_registry_repository" "pos_containers" {
   }
 
   cleanup_policies {
-    id     = "keep-latest-10"
+    id     = "keep-last-10"
     action = "KEEP"
 
     most_recent_versions {
@@ -23,7 +23,7 @@ resource "google_artifact_registry_repository" "pos_containers" {
   }
 
   cleanup_policies {
-    id     = "delete-old-images"
+    id     = "delete-older"
     action = "DELETE"
 
     condition {
