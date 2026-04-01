@@ -1,0 +1,157 @@
+name: Deploy CloudHub
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'src/**'
+      - 'docker/**'
+      - 'Directory.Build.props'
+  workflow_dispatch:
+
+env:
+  DOTNET_VERSION: '10.0.x'
+  GCP_PROJECT: ${{ secrets.GCP_PROJECT }}
+  GCP_REGION: us-central1
+  REGISTRY: us-central1-docker.pkg.dev
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    permissions:
+      packages: read
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }}
+
+      - name: Authenticate NuGet (GitHub Packages)
+        run: >
+          dotnet nuget add source
+          "https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json"
+          --name github
+          --username ${{ github.actor }}
+          --password ${{ secrets.GITHUB_TOKEN }}
+          --store-password-in-clear-text
+
+      - name: Restore
+        run: dotnet restore
+
+      - name: Build
+        run: dotnet build -c Release --no-restore
+
+      - name: Test
+        run: dotnet test -c Release --no-build --verbosity normal
+
+  pack-nuget:
+    needs: test
+    runs-on: ubuntu-latest
+    permissions:
+      packages: write
+      contents: read
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }}
+
+      - name: Authenticate NuGet (GitHub Packages)
+        run: >
+          dotnet nuget add source
+          "https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json"
+          --name github
+          --username ${{ github.actor }}
+          --password ${{ secrets.GITHUB_TOKEN }}
+          --store-password-in-clear-text
+
+      - name: Restore
+        run: dotnet restore
+
+      - name: Build
+        run: dotnet build -c Release --no-restore
+
+      - name: Pack
+        run: >
+          dotnet pack -c Release --no-build
+          -p:Version=1.0.0-ci.${{ github.run_number }}
+          -o ./artifacts/nupkg
+
+      - name: Push to GitHub Packages
+        run: >
+          dotnet nuget push "./artifacts/nupkg/*.nupkg"
+          --source github
+          --api-key ${{ secrets.GITHUB_TOKEN }}
+          --skip-duplicate
+
+  build-and-deploy:
+    needs: pack-nuget
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: ${{ secrets.GCP_WORKLOAD_IDENTITY_PROVIDER }}
+          service_account: ${{ secrets.GCP_SERVICE_ACCOUNT }}
+
+      - name: Setup gcloud
+        uses: google-github-actions/setup-gcloud@v2
+
+      - name: Configure Docker for Artifact Registry
+        run: gcloud auth configure-docker ${{ env.REGISTRY }} --quiet
+
+      - name: Generate nuget.config for Docker build
+        run: |
+          cat > nuget.config <<EOF
+          <?xml version="1.0" encoding="utf-8"?>
+          <configuration>
+            <packageSources>
+              <clear />
+              <add key="nuget.org" value="https://api.nuget.org/v3/index.json" />
+              <add key="github" value="https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json" />
+            </packageSources>
+            <packageSourceCredentials>
+              <github>
+                <add key="Username" value="${{ github.actor }}" />
+                <add key="ClearTextPassword" value="${{ secrets.GITHUB_TOKEN }}" />
+              </github>
+            </packageSourceCredentials>
+          </configuration>
+          EOF
+
+      - name: Build Docker image
+        run: |
+          IMAGE=${{ env.REGISTRY }}/${{ env.GCP_PROJECT }}/pos/cloudhub
+          SHA_TAG=$IMAGE:${{ github.sha }}
+          LATEST_TAG=$IMAGE:latest
+
+          docker build \
+            -f docker/CloudHub.Dockerfile \
+            -t "$SHA_TAG" \
+            -t "$LATEST_TAG" \
+            .
+
+      - name: Push Docker image
+        run: |
+          IMAGE=${{ env.REGISTRY }}/${{ env.GCP_PROJECT }}/pos/cloudhub
+          docker push "$IMAGE:${{ github.sha }}"
+          docker push "$IMAGE:latest"
+
+      - name: Deploy to Cloud Run
+        uses: google-github-actions/deploy-cloudrun@v2
+        with:
+          service: pos-cloudhub
+          region: ${{ env.GCP_REGION }}
+          image: ${{ env.REGISTRY }}/${{ env.GCP_PROJECT }}/pos/cloudhub:${{ github.sha }}

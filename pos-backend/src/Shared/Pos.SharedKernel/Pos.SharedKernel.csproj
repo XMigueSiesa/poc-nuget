@@ -7,8 +7,17 @@
 
   <ItemGroup>
     <FrameworkReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
     <PackageReference Include="Ulid" Version="$(UlidVersion)" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="$(EfCoreVersion)" />
+    <PackageReference Include="Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore" Version="$(EfCoreVersion)" />
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="$(NpgsqlEfVersion)" />
+    <!-- OpenTelemetry -->
+    <PackageReference Include="OpenTelemetry.Extensions.Hosting" Version="$(OtelVersion)" />
+    <PackageReference Include="OpenTelemetry.Instrumentation.AspNetCore" Version="$(OtelVersion)" />
+    <PackageReference Include="OpenTelemetry.Instrumentation.Http" Version="$(OtelVersion)" />
+    <PackageReference Include="OpenTelemetry.Instrumentation.Runtime" Version="$(OtelVersion)" />
+    <PackageReference Include="OpenTelemetry.Exporter.OpenTelemetryProtocol" Version="$(OtelVersion)" />
+    <PackageReference Include="OpenTelemetry.Exporter.Console" Version="$(OtelVersion)" />
   </ItemGroup>
 </Project>

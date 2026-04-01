@@ -21,6 +21,9 @@
     <NpgsqlEfVersion>10.0.1</NpgsqlEfVersion>
     <NamingConventionsVersion>10.0.1</NamingConventionsVersion>
     <UlidVersion>1.3.4</UlidVersion>
+    <JwtBearerVersion>10.0.4</JwtBearerVersion>
+    <!-- OpenTelemetry — stable channel, compatible with .NET 10 -->
+    <OtelVersion>1.12.0</OtelVersion>
   </PropertyGroup>
 
   <!--

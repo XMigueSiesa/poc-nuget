@@ -64,7 +64,8 @@ public static class SyncProductsEndpoint
 
             await db.SaveChangesAsync(ct);
             return Results.Ok(new { Synced = true, Id = dto.Id });
-        });
+        })
+        .RequireAuthorization("SyncEndpoint");
 
         return app;
     }

@@ -45,8 +45,29 @@ public sealed class SyncDbContext(DbContextOptions<SyncDbContext> options) : DbC
             entity.Property(e => e.SyncedAt)
                 .HasColumnName("synced_at");
 
+            // Resilience columns
+            entity.Property(e => e.RetryCount)
+                .HasColumnName("retry_count")
+                .IsRequired()
+                .HasDefaultValue(0);
+
+            entity.Property(e => e.NextRetryAt)
+                .HasColumnName("next_retry_at");
+
+            entity.Property(e => e.LastError)
+                .HasColumnName("last_error")
+                .HasMaxLength(2000);
+
+            entity.Property(e => e.DeadLetteredAt)
+                .HasColumnName("dead_lettered_at");
+
+            // Index for pending entries (excludes synced and dead-lettered)
             entity.HasIndex(e => e.SyncedAt)
-                .HasFilter("\"synced_at\" IS NULL");
+                .HasFilter("\"synced_at\" IS NULL AND \"dead_lettered_at\" IS NULL");
+
+            // Index for dead-lettered entries (monitoring / reprocessing)
+            entity.HasIndex(e => e.DeadLetteredAt)
+                .HasFilter("\"dead_lettered_at\" IS NOT NULL");
         });
     }
 }

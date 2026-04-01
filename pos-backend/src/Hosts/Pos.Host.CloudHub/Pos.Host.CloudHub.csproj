@@ -4,6 +4,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="$(EfCoreVersion)" />
+    <PackageReference Include="Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore" Version="$(EfCoreVersion)" />
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="$(NpgsqlEfVersion)" />
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="$(EfCoreVersion)" />
     <PackageReference Include="Scalar.AspNetCore" Version="2.6.0" />

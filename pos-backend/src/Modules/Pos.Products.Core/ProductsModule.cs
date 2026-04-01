@@ -43,6 +43,7 @@ public static class ProductsModule
 
         products.MapPost("/", async (CreateProductRequest request, IProductRepository repo, CancellationToken ct) =>
         {
+            if (request.Price <= 0) return Results.BadRequest(new { error = "El precio debe ser mayor a cero." });
             var product = await repo.CreateAsync(request, ct);
             return Results.Created($"/api/products/{product.Id}", product);
         });

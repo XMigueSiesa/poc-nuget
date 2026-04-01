@@ -8,4 +8,10 @@ public sealed record SyncOutboxEntry
     public required string Payload { get; init; }
     public DateTimeOffset CreatedAt { get; init; } = DateTimeOffset.UtcNow;
     public DateTimeOffset? SyncedAt { get; init; }
+
+    // Resilience fields
+    public int RetryCount { get; init; } = 0;
+    public DateTimeOffset? NextRetryAt { get; init; }
+    public string? LastError { get; init; }
+    public DateTimeOffset? DeadLetteredAt { get; init; }
 }
